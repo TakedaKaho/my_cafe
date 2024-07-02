@@ -1,1 +1,65 @@
-<h1>head</h1>
+<div class="border-bottom row">
+  <% if admin_signed_in? %>
+    <div class="ml-4"></div>
+    <div class="mt-1 mr-1 mb-1 ml-0">
+      <%= link_to admin_path do %>
+        <%= image_tag '4.png', size: '200x133' %>
+      <% end %>
+    </div>
+
+    <h1 class="row col-4 mt-4 mr-0 mb-4 ml-0" style="margin-top: 60px !important;">管理者用ページ</h1>
+    <div class="col-3"></div>
+    <div class="mt-4 mr-0 mb-4 ml-0 row">
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-info btn-primary rounded-pill mt-auto mr-2 mb-auto ml-4", style: "font-size: 18px; padding: 10px 20px;" %>
+    </div>
+    
+  <% elsif user_signed_in? %>
+    <div class="col-1"></div>
+    <div class="mt-1 mr-0 mb-1 ml-0">
+      <%= link_to root_path do %>
+        <%= image_tag '3.png', size: '200x133' %>
+      <% end %>
+    </div>
+    <div class="col-2"></div>
+    <div class="mt-4 mr-0 mb-4 ml-0 row">
+      <%= link_to user_path(current_user), class: "btn btn-info btn-primary rounded-pill mt-auto mr-2 mb-auto ml-4", style: "font-size: 18px; padding: 10px 20px;" do %>
+      My Page <i class="fa-solid fa-user"></i>
+      <% end %>
+    </div>
+    <div class="mt-4 mr-0 mb-4 ml-0 row">
+      <%= link_to cafes_path, class: "btn btn-dark btn-primary rounded-pill mt-auto mr-2 mb-auto ml-4", style: "font-size: 18px; padding: 10px 20px;" do %>
+       Cafe一覧 <i class="fa-solid fa-mug-hot"></i>
+      <% end %>
+
+    </div>
+    <div class="mt-4 mr-0 mb-4 ml-0 row">
+      <%= link_to pick_ups_path, class: "btn btn-danger btn-primary rounded-pill mt-auto mr-2 mb-auto ml-4", style: "font-size: 18px; padding: 10px 20px;" do %>
+      今週のPickUp cafe <i class="fa-solid fa-face-laugh"></i>
+      <% end %>
+    </div>
+    
+  <% else %>
+  
+    <div class="col-1"></div>
+    <div class="mt-1 mr-0 mb-1 ml-0">
+      <%= link_to root_path do %>
+        <%= image_tag '3.png', size: '200x133' %>
+      <% end %>
+    </div>
+    <div class="col-2"></div>
+    <div class="mt-4 mr-0 mb-4 ml-0 row">
+      <%= link_to "ゲストログイン後で", root_path, class: "btn btn-info btn-primary rounded-pill mt-auto mr-2 mb-auto ml-2", style: "padding: 8px 20px;" %>
+    </div>
+    <div class="mt-4 mr-0 mb-4 ml-0 row">
+      <%= link_to "Log In", new_user_session_path, class: "btn btn-info btn-primary rounded-pill mt-auto mr-2 mb-auto ml-2", style: "padding: 8px 20px;" %>
+    </div>
+    <div class="mt-4 mr-0 mb-4 ml-0 row">
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-info btn-primary rounded-pill mt-auto mr-2 mb-auto ml-2", style: "padding: 8px 20px;" %>
+    </div>
+    <div class="mt-4 mr-0 mb-4 ml-0 row">
+      <%= link_to "管理者ログイン", new_admin_session_path, class: "btn btn-danger btn-primary rounded-pill mt-auto mr-2 mb-auto ml-2", style: "padding: 8px 20px;" %>
+    </div>
+  
+    
+  <% end %>
+</div>
