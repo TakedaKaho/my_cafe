@@ -4,5 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
+         
   has_one_attached :profile_image
+  
+  #退会済みuserがログインできないように
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
 end

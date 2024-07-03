@@ -1,7 +1,44 @@
-<h2>My page</h2>
+<div class="ml-4">
+   <%= flash[:edit_notice] %>
+</div>
 
- <%= @user.name %>
- <%= @user.body %>
- 
-<%= link_to "編集", edit_user_path %>
-<%= link_to "ログアウト", destroy_user_session_path, method: :delete%>
+<div class="container">
+  <div class="row">
+      
+    <div class="col-4 mt-4">
+      <h2>My page</h2>
+      
+      <div class="card" style="width: 17rem;">
+        <% if @user.profile_image.attached? %>
+          <%= image_tag url_for(@user.profile_image), class: "rounded-circle ml-2 mt-3", style: "width: 100px; height: 100px; object-fit: cover;" %>
+        <% else %>
+          <%= image_tag "no_image.jpg", class: "card-img-top", style: "width: 100px; height: 100px;"%>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title">Name</h5>
+          <p class="card-text"><%= @user.name %></p>
+          <p class="card-text"><%= @user.body %></p>
+        </div>
+      </div>
+        <% if user_signed_in? && @user == current_user %>
+          <div class="ml-3 mt-2 mb-2">
+           <%= link_to edit_user_path, class: "btn btn-sm btn-outline-dark" do %>
+             編集 <i class="fa-regular fa-pen-to-square"></i>
+           <% end %>
+           
+           <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-sm btn-outline-dark" do %>
+           Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i>
+           <% end %>
+           
+           <%= link_to check_users_path, class: "btn btn-sm btn-outline-danger" do %>
+           退会 <i class="fa-solid fa-bomb"></i>
+           <% end %>
+          </div>
+        <% end %>
+    </div>
+    <div class="col-8 mt-4">
+        <h2>My favorite</h2>
+    </div>
+    
+  </div>
+</div>
