@@ -1,1 +1,36 @@
-admin_tags
+<div class="ml-4">
+  <%= flash[:tag_update_notice] %>
+</div>
+
+<div class="container">
+  <div class ="row col-4"><h3>Tag 一覧・追加・編集</h3></div>
+
+    <h6><i class="fa-solid fa-hashtag"></i>現在のTag数: <%= @tag_count %>個</h6>
+    
+  <%= form_with model: @tag, url: admin_tags_path, local: true do |f| %>
+    <div class="mt-4">
+      <%= f.label :name, "Tag名" %>
+      <%= f.text_field :name %>
+      <%= f.submit "新規追加", class: "btn btn-sm btn-info" %>
+    </div>
+  <% end %>
+  
+  <div class="row mt-3">
+    <% @tags.each do |tag| %>
+      <div class="col-md-6">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fa-solid fa-tags"></i> <%= tag.name %></h5>
+            <div class="btn-group">
+              <%= link_to "編集", edit_admin_tag_path(tag), class: "btn btn-sm btn-outline-success mr-2" %>
+              <%= link_to "削除", admin_tag_path(tag), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-outline-dark" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+      <div class="pagination justify-content-center">
+        <%= paginate @tags %>
+      </div>
+</div>

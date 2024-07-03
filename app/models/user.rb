@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :password, presence: true
          
   has_one_attached :profile_image
+  has_many :cafe_tags
   
   #退会済みuserがログインできないように
   def active_for_authentication?
