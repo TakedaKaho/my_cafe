@@ -1,2 +1,39 @@
-<h1>管理者トップ</h1>
-<%= link_to "LOGOUT",destroy_admin_session_path, method: :delete%>
+<div class="container">
+  <h1 class="text-center mt-4 mb-4">TOP</h1>
+
+  <div class="row text-center">
+    <div class="col-md-4 mb-4">
+      <%= link_to admin_users_path do %>
+        <%= image_tag 'kt1.png', class: 'img-fluid', size: '150x150' %>
+      <% end %>
+      <p class="mt-2">1. 会員管理</p>
+    </div>
+    <div class="col-md-4 mb-4">
+      <%= link_to admin_cafes_path do %>
+        <%= image_tag 'kt4.png', class: 'img-fluid', size: '150x150' %>
+      <% end %>
+      <p class="mt-2">2. 投稿管理</p>
+    </div>
+    <div class="col-md-4 mb-4">
+      <%= link_to admin_comments_path do %>
+        <%= image_tag 'kt2.png', class: 'img-fluid', size: '150x150' %>
+      <% end %>
+      <p class="mt-2">3. コメント管理</p>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-md-6 mb-4">
+      <%= link_to admin_tags_path do %>
+        <%= image_tag 'kt5.png', class: 'img-fluid', size: '150x150' %>
+      <% end %>
+      <p class="mt-2">4. タグ管理</p>
+    </div>
+    <div class="col-md-6 mb-4">
+      <%= link_to admin_pick_ups_path do %>
+        <%= image_tag 'kt3.png', class: 'img-fluid', size: '150x150' %>
+      <% end %>
+      <p class="mt-2">5. PickUp管理</p>
+    </div>
+  </div>
+</div>
