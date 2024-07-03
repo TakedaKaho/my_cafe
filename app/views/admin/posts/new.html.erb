@@ -1,0 +1,71 @@
+<h1>カフェの投稿</h1>
+
+<%= form_with model: @post, url: admin_posts_path, method: :post, local: true, multipart: true do |form| %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <%= form.label :post_images, "プロフィール画像（最大3枚）", class: "form-label" %>
+          <%= form.file_field :post_images, multiple: true, accept: "image/*", class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= form.label :name, "カフェ名:", class: "form-label" %>
+          <%= form.text_field :name, required: true, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= form.label :address, "住所:", class: "form-label" %>
+          <%= form.text_field :address, required: true, class: "form-control" %>
+        </div>
+        
+        <div class="card mb-3">
+          <%= form.label :tag_ids, "タグ", class: "form-label" %>
+          <div class="container">
+            <div class="row">
+              <% Tag.all.each do |tag| %>
+                <div class="col-md-4">
+                  <%= form.check_box :tag_ids, { multiple: true }, tag.id, nil %>
+                  <%= tag.name %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="mb-3">
+          <%= form.label :days_open, "営業日:", class: "form-label" %>
+          <%= form.text_area :days_open, id: 'days_open', required: true, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= form.label :hours, "営業時間:", class: "form-label" %>
+          <%= form.text_area :hours, id: 'hours', required: true, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :review, "レビュー:", class: "form-label" %>
+          <%= form.text_area :review, required: true, class: "form-control", rows: 8 %>
+        </div>
+        
+        <div class="mb-3 text-center">
+          <%= form.submit "投稿", class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+  
+    <%#= form.label :latitude, "緯度:" %>
+    <%#= form.text_field :latitude, id: 'latitude', required: true, readonly: true %>
+  
+    <%#= form.label :longitude, "経度:" %>
+    <%#= form.text_field :longitude, id: 'longitude', required: true, readonly: true %>
+
+
+

@@ -1,0 +1,9 @@
+<%= link_to "new", new_admin_post_path %>
+
+<% @posts.each do |post| %>
+<%= post.name %>
+<%= post.address %>
+<%= post.days_open.gsub(/\n/, '<br>').html_safe %>
+<%= post.hours.gsub(/\n/, '<br>').html_safe %>
+
+<% end %>

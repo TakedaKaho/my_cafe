@@ -1,6 +1,6 @@
 require "test_helper"
 
-class CafeTest < ActiveSupport::TestCase
+class Public::PostsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

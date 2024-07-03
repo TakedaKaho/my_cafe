@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # 管理者側のルーティング
   namespace :admin do
     get '/', to: 'homes#top'
-    resources :cafes
+    resources :posts
     resources :pick_ups
     resources :tags, only: [:index, :create, :edit, :update, :destroy]
     resources :users, only: [:index, :edit, :update]
@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     resources :likes, only: [:show, :create, :index, :destroy]
     resources :pick_ups, only: [:show, :index]
     
-    resources :cafes, only: [:show, :index] do
+    resources :posts, only: [:show, :index] do
       collection do
         get 'search'
         get 'tag_search'

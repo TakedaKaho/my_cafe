@@ -1,0 +1,12 @@
+<h1><%= @post.name %></h1>
+
+
+<% @post.post_images.each do |image| %>
+  <%= image_tag url_for(image), class: "img-fluid", alt: "投稿画像" %>
+<% end %>
+
+<p>住所: <%= @post.address %></p>
+<p>営業時間: <%= @post.hours.gsub(/\n/, '<br>').html_safe %></p>
+<p>営業日: <%= @post.days_open.gsub(/\n/, '<br>').html_safe %></p>
+<p>レビュー:</p>
+<p><%= @post.review.gsub(/\n/, '<br>').html_safe %></p>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_03_035410) do
+ActiveRecord::Schema.define(version: 2024_07_03_132318) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -53,26 +53,14 @@ ActiveRecord::Schema.define(version: 2024_07_03_035410) do
   end
 
   create_table "cafe_tags", force: :cascade do |t|
-    t.integer "cafe_id", null: false
+    t.integer "post_id", null: false
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "cafes", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "address", null: false
-    t.time "hours", null: false
-    t.date "days_open", null: false
-    t.string "review", null: false
-    t.float "latitude", null: false
-    t.float "longitude", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "comments", force: :cascade do |t|
-    t.integer "cafe_id", null: false
+    t.integer "post_id", null: false
     t.integer "user_id", null: false
     t.integer "star", null: false
     t.string "comment", null: false
@@ -81,16 +69,26 @@ ActiveRecord::Schema.define(version: 2024_07_03_035410) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "cafe_id", null: false
+    t.integer "post_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "pick_ups", force: :cascade do |t|
-    t.integer "cafe_id", null: false
+    t.integer "post_id", null: false
     t.string "title", null: false
     t.string "body", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address", null: false
+    t.string "hours", null: false
+    t.string "days_open", null: false
+    t.string "review", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
