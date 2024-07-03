@@ -1,5 +1,5 @@
 class Tag < ApplicationRecord
     has_many :cafe_tags
     
-    validates :name, presence: true
+    validates :name, presence: true, uniqueness: true
 end
