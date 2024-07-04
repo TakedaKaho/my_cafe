@@ -60,7 +60,15 @@
          </div>
        </div>
        
+       <div class="btn-group mt-4 d-flex justify-center">
+       <%= link_to edit_admin_post_path, class: "btn btn-sm btn-outline-dark" do %>
+          編集 <i class="fa-regular fa-pen-to-square"></i>
+       <% end %>
        
+       <%= link_to admin_post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-outline-danger" do %>
+          消去 <i class="fa-solid fa-trash-can"></i>
+       <% end %>
+       </div>
        
   </div>
 </div>

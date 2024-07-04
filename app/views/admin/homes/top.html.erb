@@ -1,39 +1,45 @@
 <div class="container">
-  <h1 class="text-center mt-4 mb-4">TOP</h1>
+  <h1 class="text-center mt-4 mb-4">管理者TOP</h1>
 
   <div class="row text-center">
+    <div class="col-4 md-4 mb-4">
+      <%= link_to root_path do %>
+        <%= image_tag 'KT.png', class: 'img-fluid', size: '150x150' %>
+      <% end %>
+      <p class="mt-2">1. サイトTOPへ</p>
+    </div>
     <div class="col-md-4 mb-4">
       <%= link_to admin_users_path do %>
-        <%= image_tag 'kt1.png', class: 'img-fluid', size: '150x150' %>
+        <%= image_tag 'KT1.png', class: 'img-fluid', size: '150x150' %>
       <% end %>
-      <p class="mt-2">1. 会員管理</p>
+      <p class="mt-2">2. 会員管理</p>
     </div>
     <div class="col-md-4 mb-4">
       <%= link_to admin_posts_path do %>
-        <%= image_tag 'kt4.png', class: 'img-fluid', size: '150x150' %>
+        <%= image_tag 'KT2.png', class: 'img-fluid', size: '150x150' %>
       <% end %>
-      <p class="mt-2">2. 投稿管理</p>
-    </div>
-    <div class="col-md-4 mb-4">
-      <%= link_to admin_comments_path do %>
-        <%= image_tag 'kt2.png', class: 'img-fluid', size: '150x150' %>
-      <% end %>
-      <p class="mt-2">3. コメント管理</p>
+      <p class="mt-2">3. 投稿管理</p>
     </div>
   </div>
 
   <div class="row text-center">
-    <div class="col-md-6 mb-4">
-      <%= link_to admin_tags_path do %>
-        <%= image_tag 'kt5.png', class: 'img-fluid', size: '150x150' %>
+    <div class="col-md-4 mb-4">
+      <%= link_to admin_comments_path do %>
+        <%= image_tag 'KT3.png', class: 'img-fluid', size: '150x150' %>
       <% end %>
-      <p class="mt-2">4. タグ管理</p>
+      <p class="mt-2">4. コメント管理</p>
     </div>
-    <div class="col-md-6 mb-4">
-      <%= link_to admin_pick_ups_path do %>
-        <%= image_tag 'kt3.png', class: 'img-fluid', size: '150x150' %>
+    <div class="col-md-4 mb-4">
+      <%= link_to admin_tags_path do %>
+        <%= image_tag 'KT4.png', class: 'img-fluid', size: '150x150' %>
       <% end %>
-      <p class="mt-2">5. PickUp管理</p>
+      <p class="mt-2">5. タグ管理</p>
+    </div>
+    <div class="col-md-4 mb-4">
+      <%= link_to admin_pick_ups_path do %>
+        <%= image_tag 'KT5.png', class: 'img-fluid', size: '150x150' %>
+      <% end %>
+      <p class="mt-2">6. PickUp管理</p>
     </div>
   </div>
 </div>
