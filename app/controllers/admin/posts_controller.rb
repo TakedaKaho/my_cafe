@@ -7,7 +7,8 @@ class Admin::PostsController < ApplicationController
     def create
       @post = Post.new(post_params.except(:tag_ids))
      if @post.save
-      redirect_to admin_posts_path, notice: 'カフェが投稿されました。'
+      @post.tag_ids = params[:post][:tag_ids] if params[:post][:tag_ids].present?
+      redirect_to admin_post_path(@post.id), notice: 'カフェが投稿されました。'
      else
       render :new
      end
@@ -31,7 +32,7 @@ class Admin::PostsController < ApplicationController
     end 
     
   def post_params
-    params.require(:post).permit(:name, :address, :hours, :days_open, :review, { tag_ids: [] }, post_images: [])
+    params.require(:post).permit(:name, :address, :hours, :days_open, :review, post_images: [], tag_ids: [])
   end
   
   

@@ -8,7 +8,7 @@ class User < ApplicationRecord
   #validates :email, presence: true
   #validates :password, presence: true
          
-  has_one_attached :profile_images
+  has_one_attached :profile_image
   
   
   #退会済みuserがログインできないように

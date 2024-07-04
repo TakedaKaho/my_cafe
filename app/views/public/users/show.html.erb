@@ -10,7 +10,7 @@
       
       <div class="card" style="width: 17rem;">
         <% if @user.profile_image.attached? %>
-          <%= image_tag url_for(@user.profile_image), class: "rounded-circle ml-2 mt-3", style: "width: 100px; height: 100px; object-fit: cover;" %>
+          <%= image_tag url_for(@user.profile_image), class: "rounded-circle mt-3", style: "width: 100px; height: 100px; object-fit: cover; margin-left: 1rem;" %>
         <% else %>
           <%= image_tag "no_image.jpg", class: "card-img-top", style: "width: 100px; height: 100px;"%>
         <% end %>
