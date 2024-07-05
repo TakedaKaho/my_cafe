@@ -23,9 +23,18 @@ class Admin::PostsController < ApplicationController
     end 
     
     def edit
+     @post = Post.find(params[:id])
     end 
     
     def update
+     @post = Post.find(params[:id])
+     if @post.update(post_params.except(:tag_ids))
+      @post.tags = Tag.where(id: params[:post][:tag_ids].reject(&:blank?))
+      flash[:post_edit_notice]="正常に変更内容が反映されました"
+      redirect_to admin_post_path(@post)
+     else
+      render edit
+     end 
     end 
     
     def destroy

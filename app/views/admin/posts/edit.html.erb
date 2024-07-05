@@ -1,0 +1,59 @@
+<div class="container">
+  <%= form_with(model: @post, url: admin_post_path(@post), method: :patch, local: true) do |form| %>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= form.label :post_images, "カフェ画像" %>
+          <%= form.file_field :post_images, accept: "image/*", class: "form-control-file" %>
+        </div>
+        <% if @post.post_images.attached? %>
+          <% @post.post_images.each do |image| %>
+            <%= image_tag url_for(image), class: "img-thumbnail mt-2", style: "width: 90px; height: 90px; object-fit: cover;" %>
+          <% end %>
+        <% else %>
+          <%= image_tag "noimage-post.jpg", class: "img-thumbnail mt-2", size: "200x200" %>
+        <% end %>
+        
+        <div class="card mb-3">
+          <div class="card-body">
+            <%= form.label :tag_ids, "タグ" %>
+            <div class="row">
+              <% Tag.all.each_with_index do |tag, index| %>
+                <div class="col-6">
+                  <%= form.check_box :tag_ids, { multiple: true }, tag.id, nil %>
+                  <%= tag.name %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div class="col-md-8">
+        <div class="form-group">
+          <%= form.label :name, "名前" %>
+          <%= form.text_field :name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :address, "住所" %>
+          <%= form.text_area :address, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :days_open, "営業日" %>
+          <%= form.text_area :days_open, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :hours, "営業時間" %>
+          <%= form.text_area :hours, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :review, "レビュー" %>
+          <%= form.text_area :review, class: "form-control" %>
+        </div>
+        
+        <%= form.submit "変更保存", class: "btn btn-sm btn-outline-dark mt-2 mb-2" %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,4 +1,8 @@
 <div class="row">
+  <div class="ml-4">
+    <%= flash[:post_edit_notice] %>
+  </div>
+  
     <div class="col-1"></div>
     <div class="col-3 mb-2 mt-2">
         <span style="font-size: 2em;"><i class="fa-solid fa-caret-right"></i> <%= @post.name %></span>
@@ -44,7 +48,7 @@
       <tbody>
         <tr>
           
-          <td><%= @post.address %></td>
+          <td><%= @post.address.gsub(/\n/, '<br>').html_safe %></td>
           <td><%= @post.days_open.gsub(/\n/, '<br>').html_safe %></td>
           <td><%= @post.hours.gsub(/\n/, '<br>').html_safe %></td>
           <td><%= @post.review.gsub(/\n/, '<br>').html_safe %></td>
