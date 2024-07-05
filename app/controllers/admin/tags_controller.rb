@@ -1,9 +1,16 @@
 class Admin::TagsController < ApplicationController
 
     def create
-        @tag = Tag.new(tag_params)
-        @tag.save
+      @tag = Tag.new(tag_params)
+      if @tag.save
+        flash[:success] = "タグが正常に作成されました。"
         redirect_to admin_tags_path
+      else
+        flash.now[:error] = "タグの作成に失敗しました。"
+        @tags = Tag.all.page(params[:page]).per(12)
+        @tag_count = Tag.count
+        render :index
+      end 
     end
     
     def index
