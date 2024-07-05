@@ -1,0 +1,65 @@
+<div class="row">
+  
+    <div class="col-1"></div>
+    <div class="col-3 mb-2 mt-2">
+        <span style="font-size: 2em;"><i class="fa-solid fa-caret-right"></i> <%= @post.name %></span>
+    </div>
+    <div class="col-2"></div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-4">
+
+    <div id="postImagesCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% @post.post_images.each_with_index do |image, index| %>
+          <div class="carousel-item <%= 'active' if index == 0 %>">
+            <%= image_tag url_for(image), class: "d-block w-100", style: "width: 300px; height: 280px; object-fit: cover;", alt: "投稿画像" %>
+          </div>
+        <% end %>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#postImagesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#postImagesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th><i class="fa-solid fa-location-dot fa-sm" style="color: #ff0f6f;"></i> 住所</th>
+          <th><i class="fa-solid fa-calendar" style="color: #c6b69f;"></i> 営業日</th>
+          <th><i class="fa-solid fa-clock" style="color: #c6b69f;"></i> 営業時間</th>
+          <td>レビュー <i class="fa-solid fa-comment" style="color: #FFD43B;"></i></td>
+ 
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          
+          <td><%= @post.address.gsub(/\n/, '<br>').html_safe %></td>
+          <td><%= @post.days_open.gsub(/\n/, '<br>').html_safe %></td>
+          <td><%= @post.hours.gsub(/\n/, '<br>').html_safe %></td>
+          <td><%= @post.review.gsub(/\n/, '<br>').html_safe %></td>
+        </tr>
+      </tbody>
+    </table>
+       <div class="card" style="width: 500px;">
+        <div class="card-body">
+         <h6 class="card-title"><i class="fa-solid fa-tags fa-sm" style="color: #515053;"></i> タグ</h6>
+           <% @post.tags.each do |tag| %>
+             <span class="badge bg-info">#<%= tag.name %></span>
+           <% end %>
+         </div>
+       </div>
+       
+  </div>
+</div>

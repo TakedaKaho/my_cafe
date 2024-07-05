@@ -6,14 +6,11 @@
           <%= form.label :post_images, "カフェ画像" %>
           <%= form.file_field :post_images, accept: "image/*", class: "form-control-file" %>
         </div>
-        <% if @post.post_images.attached? %>
+        
           <% @post.post_images.each do |image| %>
             <%= image_tag url_for(image), class: "img-thumbnail mt-2", style: "width: 90px; height: 90px; object-fit: cover;" %>
           <% end %>
-        <% else %>
-          <%= image_tag "noimage-post.jpg", class: "img-thumbnail mt-2", size: "200x200" %>
-        <% end %>
-        
+          
         <div class="card mb-3">
           <div class="card-body">
             <%= form.label :tag_ids, "タグ" %>

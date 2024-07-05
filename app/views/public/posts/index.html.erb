@@ -1,0 +1,21 @@
+<h1 class="text-center mb-4">カフェ一覧</h1>
+
+<div class="container">
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-md-3 mb-4">
+        <%= link_to post_path(post.id), class: "text-decoration-none text-dark" do %>
+          <div class="card h-100">
+            <div class="card-body text-center">
+                <%= image_tag url_for(post.post_images.first), class: "img-thumbnail", style: "width: 160px; height: 140px; object-fit: cover;" %>
+              <h5 class="card-title mt-2">Name: <%= post.name %></h5>
+              <h5 class="card-title">平均評価</h5>
+              <!-- 後から評価の平均出す -->
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

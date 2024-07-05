@@ -23,6 +23,7 @@
           <%= form.label :tag_ids, "タグ", class: "form-label" %>
           <div class="container">
             <div class="row">
+              <!--出力時３列にするため記載-->
               <% Tag.all.each_slice(3) do |tag_group| %>
                 <% tag_group.each do |tag| %>
                   <div class="col-md-4">
