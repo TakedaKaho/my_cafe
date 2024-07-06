@@ -1,16 +1,13 @@
 <div class="row">
-  
-    <div class="col-1"></div>
-    <div class="col-3 mb-2 mt-2">
-        <span style="font-size: 2em;"><i class="fa-solid fa-caret-right"></i> <%= @post.name %></span>
-    </div>
-    <div class="col-2"></div>
+  <div class="col-1"></div>
+  <div class="col-3 mb-2 mt-2">
+    <span style="font-size: 2em;"><i class="fa-solid fa-caret-right"></i> <%= @post.name %></span>
+  </div>
+  <div class="col-2"></div>
 </div>
-
 
 <div class="row">
   <div class="col-md-4">
-
     <div id="postImagesCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <% @post.post_images.each_with_index do |image, index| %>
@@ -31,7 +28,6 @@
   </div>
 
   <div class="col-md-8">
-
     <table class="table">
       <thead>
         <tr>
@@ -39,12 +35,10 @@
           <th><i class="fa-solid fa-calendar" style="color: #c6b69f;"></i> 営業日</th>
           <th><i class="fa-solid fa-clock" style="color: #c6b69f;"></i> 営業時間</th>
           <td>レビュー <i class="fa-solid fa-comment" style="color: #FFD43B;"></i></td>
- 
         </tr>
       </thead>
       <tbody>
         <tr>
-          
           <td><%= @post.address.gsub(/\n/, '<br>').html_safe %></td>
           <td><%= @post.days_open.gsub(/\n/, '<br>').html_safe %></td>
           <td><%= @post.hours.gsub(/\n/, '<br>').html_safe %></td>
@@ -52,20 +46,74 @@
         </tr>
       </tbody>
     </table>
-       <div class="card" style="width: 500px;">
-        <div class="card-body">
-         <h6 class="card-title"><i class="fa-solid fa-tags fa-sm" style="color: #515053;"></i> タグ</h6>
-           <% @post.tags.each do |tag| %>
-             <span class="badge bg-info">#<%= tag.name %></span>
-           <% end %>
-         </div>
-       </div>
-       
+    <div class="card" style="width: 500px;">
+      <div class="card-body">
+        <h6 class="card-title"><i class="fa-solid fa-tags fa-sm" style="color: #515053;"></i> タグ</h6>
+        <% @post.tags.each do |tag| %>
+          <span class="badge bg-info">#<%= tag.name %></span>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
 <!--コメント機能-->
-<div class ="row">
-  
-  
+<div class="container">
+  <% if flash[:success] %>
+    <div class="alert alert-success">
+      <%= flash[:success] %>
+    </div>
+  <% elsif flash[:error] %>
+    <div class="alert alert-danger">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+ <div class="row">
+  <div class="col mt-4">
+    <h5>コメント、レビューを残す</h5>
+    <%= form_with(model: [@post, @post.comments.build], local: true) do |form| %>
+      <div class="form-group">
+        <%= form.text_area :comment, class: "form-control" %>
+      </div>
+      <%= form.submit "コメントを投稿する", class: "btn btn-sm btn-outline-success" %>
+    <% end %>
+  </div>
+
+<div class="col-md-8">
+  <% if @comments.any? %>
+    <h3>コメント一覧</h3>
+    <% @comments.each do |comment| %>
+      <div class="card mb-1">
+        <div class="card-body">
+          <div class="d-flex">
+            <% if comment.user.present? && comment.user.profile_image.attached? %>
+              <div class="me-3">
+                <%= image_tag url_for(comment.user.profile_image), class: "avatar-img rounded-circle", style: "width: 50px; height: 50px; object-fit: cover;" %>
+                <p class="text-center"><small class="text-muted"><%= comment.user.name if comment.user %></small></p>
+              </div>
+            <% else %>
+              <div class="me-3">
+                <%= image_tag "no_image.jpg", class: "avatar-img rounded-circle", style: "width: 50px; height: 50px; object-fit: cover;" %>
+                <p class="text-center"><small class="text-muted">ゲストユーザー</small></p>
+              </div>
+            <% end %>
+            <div class="flex-grow-1">
+              <p class="card-text"><small class="text-muted"><%= comment.comment.gsub(/\n/, '<br>').html_safe %></small></p>
+            </div>
+            <% if current_user == comment.user %>
+              <div class="ms-auto d-flex flex-column align-items-end">
+                <%= button_to "削除する", post_comment_path(@post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm mb-2" %>
+                <p class="card-text mb-0"><small class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d") %></small></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>まだコメントはありません。</p>
+  <% end %>
+</div>
+
 </div>

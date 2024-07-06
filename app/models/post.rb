@@ -1,7 +1,9 @@
 class Post < ApplicationRecord
   has_many :cafe_tags
   has_many :tags, through: :cafe_tags
-    
+  
+  has_many :comments, dependent: :destroy
+  
   has_many_attached :post_images
     
   validates :name, presence: true
