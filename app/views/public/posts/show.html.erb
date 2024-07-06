@@ -76,13 +76,14 @@
       <div class="form-group">
         <%= form.text_area :comment, class: "form-control" %>
       </div>
-      <%= form.submit "コメントを投稿する", class: "btn btn-sm btn-outline-success" %>
+      <%= form.submit "コメントを投稿する", class: "btn btn-sm btn-outline-dark" %>
     <% end %>
   </div>
 
 <div class="col-md-8">
   <% if @comments.any? %>
-    <h3>コメント一覧</h3>
+    <h3><i class="fa-solid fa-comments fa-sm" style="color: #707070;"></i> コメント一覧</h3> 
+    コメント数: <%= @comments.count %>件
     <% @comments.each do |comment| %>
       <div class="card mb-1">
         <div class="card-body">
@@ -101,12 +102,12 @@
             <div class="flex-grow-1">
               <p class="card-text"><small class="text-muted"><%= comment.comment.gsub(/\n/, '<br>').html_safe %></small></p>
             </div>
-            <% if current_user == comment.user %>
-              <div class="ms-auto d-flex flex-column align-items-end">
-                <%= button_to "削除する", post_comment_path(@post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm mb-2" %>
-                <p class="card-text mb-0"><small class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d") %></small></p>
-              </div>
-            <% end %>
+            <div class="ms-auto d-flex flex-column align-items-end">
+              <% if current_user == comment.user %>
+                <%= button_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-dark btn-sm mb-2" %>
+              <% end %>
+              <p class="card-text mb-0"><small class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d") %></small></p>
+            </div>
           </div>
         </div>
       </div>
@@ -115,5 +116,6 @@
     <p>まだコメントはありません。</p>
   <% end %>
 </div>
+
 
 </div>
