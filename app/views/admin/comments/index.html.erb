@@ -1,25 +1,28 @@
-<!-- app/views/admin/comments/index.html.erb -->
 
 <h1>コメント一覧</h1>
 <table class="table">
   <thead>
     <tr>
-      <th>投稿ID</th>
-      <th>ユーザー名</th>
-      <th>コメント内容</th>
       <th>作成日時</th>
-      <th>操作</th>
+      <th>ユーザー名</th>
+      <th>コメント内容 <i class="fa-solid fa-comment" style="color: #c8e7f4;"></i></th>
+      <th>平均評価</th>
+      <th>カフェ名</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @comments.each do |comment| %>
       <tr>
-        <td><%= comment.post_id %></td>
+        <td><%= comment.created_at.strftime("%Y-%m-%d") %></td>
         <td><%= comment.user.name if comment.user %></td>
         <td><%= comment.comment %></td>
-        <td><%= comment.created_at.strftime("%Y-%m-%d") %></td>
+        <td><i class="fa-solid fa-star fa-sm" style="color: #FFD43B;"></i> <%= comment.star %>点</td>
+        <td><%= comment.post.name %></td>
         <td>
-          <%= link_to "削除", admin_comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "text-danger" %>
+          <%= link_to admin_comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="fa-solid fa-trash-can"></i>
+          <% end %>
         </td>
       </tr>
     <% end %>

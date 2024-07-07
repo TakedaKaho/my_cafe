@@ -7,10 +7,9 @@
         <%= link_to post_path(post.id), class: "text-decoration-none text-dark" do %>
           <div class="card h-100">
             <div class="card-body text-center">
-                <%= image_tag url_for(post.post_images.first), class: "img-thumbnail", style: "width: 160px; height: 140px; object-fit: cover;" %>
-              <h5 class="card-title mt-2">Name: <%= post.name %></h5>
-              <h5 class="card-title">平均評価</h5>
-              <!-- 後から評価の平均出す -->
+              <%= image_tag url_for(post.post_images.first), class: "img-thumbnail", style: "width: 160px; height: 140px; object-fit: cover;" %>
+              <h6 class="card-title mt-2">~Name~</h6><h5> <%= post.name %></h5>
+              <h6 class="card-title"><i class="fa-solid fa-star" style="color: #FFD43B;"></i>平均評価: <%= '%.1f' % post.average_star %>点</h6>
             </div>
           </div>
         <% end %>
@@ -18,4 +17,3 @@
     <% end %>
   </div>
 </div>
-

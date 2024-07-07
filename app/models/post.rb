@@ -17,4 +17,8 @@ class Post < ApplicationRecord
   def at_least_one_image
     errors.add(:post_images, "must have at least one attached image") unless post_images.attached?
   end
+  #postの平均評価のため
+  def average_star
+    comments.average(:star).to_f
+  end
 end
