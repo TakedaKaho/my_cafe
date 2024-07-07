@@ -1,8 +1,7 @@
 class Public::PostsController < ApplicationController
     
     def index
-     @posts = Post.includes(:comments) # データベースから投稿を取得（例：コメントも含める）平均評価のため
-     
+     @posts = Post.includes(:comments).page(params[:page]).per(12) # データベースから投稿を取得（例：コメントも含める）平均評価のため
     end
     
     def show

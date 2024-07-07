@@ -4,8 +4,20 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
+        
+        <% if @post.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+            <h6><%= pluralize(@post.errors.count, "件のエラー") %> により投稿できませんでした:</h6>
+            <ul>
+              <% @post.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
         <div class="mb-3">
-          <%= form.label :post_images, "プロフィール画像（最大3枚）", class: "form-label" %>
+          <%= form.label :post_images, "プロフィール画像（１枚〜3枚）", class: "form-label" %>
           <%= form.file_field :post_images, multiple: true, accept: "image/*", class: "form-control" %>
         </div>
 
@@ -23,7 +35,7 @@
           <%= form.label :tag_ids, "タグ", class: "form-label" %>
           <div class="container">
             <div class="row">
-              <!--出力時３列にするため記載-->
+              <!-- 出力時３列にするため記載 -->
               <% Tag.all.each_slice(3) do |tag_group| %>
                 <% tag_group.each do |tag| %>
                   <div class="col-md-4">
