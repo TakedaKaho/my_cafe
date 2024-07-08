@@ -34,7 +34,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :likes, only: [:show, :create, :index, :destroy]
     resources :pick_ups, only: [:show, :index]
     
     resources :posts, only: [:show, :index] do
@@ -43,8 +42,13 @@ Rails.application.routes.draw do
         get 'tag_search'
         #上記で任意のアクションのルーティング
       end
+      #postの resources doの中にある＝ネストできてる。
+      resource :likes, only: [:create, :show, :destroy] do
+        collection do
+          get 'index', as:"index"
+        end
+      end
       
-      resources :likes, only: [:show, :index, :create, :destroy]
       resources :comments, only: [:index, :create, :destroy]
     end
   end

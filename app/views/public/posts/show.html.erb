@@ -3,8 +3,21 @@
   <div class="col-3 mb-2 mt-2">
     <span style="font-size: 2em;"><i class="fa-solid fa-caret-right"></i> <%= @post.name %></span>
   </div>
-  <div class="col-2"></div>
-</div>
+  
+  <div class ="col-4"></div>
+  <div class="col-1 mt-4">
+    <!--いいね機能-->
+    <div id="like_buttons_<%= @post.id %>">
+     <%= render 'public/likes/like', post: @post %>
+    </div>
+  </div>
+     
+   <div class="col-3 mt-4">
+    <%= link_to post_likes_path(@post), style: "color: black; text-decoration: none;" do %>
+      <i class="fa-regular fa-hand-point-right fa-lg"></i> いいね<i class="fa-solid fa-heart fa-xs" style="color: #ff1a25;"></i>したユーザ一覧
+    <% end %>
+  </div>
+
 
 <div class="row">
   <div class="col-md-4">
@@ -91,7 +104,7 @@
           let opt = {
             starOn: "<%= asset_path('star-on.png') %>",
             starOff: "<%= asset_path('star-off.png') %>",
-            scoreName: 'comment[star]', // フォームのscoreとして保存するフィールド名
+            scoreName: 'comment[star]', // データを送りたいモデル名[カラム名]
           };
           raty(elem, opt);
         });
@@ -101,9 +114,9 @@
     <% end %>
   </div>
 
-  <div class="col-md-8">
+  <div class="col-md-8 mt-4">
     <% if @comments.any? %>
-      <h3>コメント一覧</h3> 
+      <h4>コメント一覧</h4> 
       コメント数: <%= @comments.count %>件 
       <% @comments.each do |comment| %>
         <div class="card mb-1">
@@ -123,12 +136,14 @@
               <div class="flex-grow-1">
                 <p class="card-text"><small class="text-muted"><%= comment.comment.gsub(/\n/, '<br>').html_safe %></small></p>
               </div>
+              
               <div id="star_<%= @post.id %>_<%= comment.id %>"></div>
               <script>
                 $(document).on('turbolinks:load', function() {
                   let elem = document.querySelector('#star_<%= @post.id %>_<%= comment.id %>');
                   if (elem == null) return;
-
+                  
+                  elem.innerHTML = "";
                   let opt = {  
                     starOn: "<%= asset_path('star-on.png') %>",
                     starOff: "<%= asset_path('star-off.png') %>",
@@ -138,6 +153,7 @@
                   raty(elem, opt);
                 });
               </script>
+              
               <div class="ms-auto d-flex flex-column align-items-end">
                 <% if current_user == comment.user %>
                   <%= button_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-dark btn-sm mb-2" %>

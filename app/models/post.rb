@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_many :tags, through: :cafe_tags
   
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   
   has_many_attached :post_images
     
@@ -33,6 +34,10 @@ class Post < ApplicationRecord
   #管理者側でコメント件数出すため
   def comments_count
     comments.count
+  end
+  
+  def liked_by?(user)
+    likes.exists?(user_id: user.id)
   end
   
 end
