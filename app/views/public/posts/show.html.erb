@@ -1,3 +1,4 @@
+<div class="container">
 <div class="row">
   <div class="col-1"></div>
   <div class="col-3 mb-2 mt-2">
@@ -18,7 +19,7 @@
       <i class="fa-regular fa-hand-point-right fa-lg"></i> いいね<i class="fa-solid fa-heart fa-xs" style="color: #ff1a25;"></i>したユーザ一覧
     <% end %>
   </div>
-
+</div>
 
 <div class="row">
   <div class="col-md-4">
@@ -44,6 +45,45 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+    <div>
+       <% if flash[:success] %>
+      <div class="alert alert-success">
+        <%= flash[:success] %>
+      </div>
+    <% elsif flash[:error] %>
+      <div class="alert alert-danger">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+    <h5>コメント、レビューを残す</h5>
+    <%= form_with(model: [@post, Comment.new], local: true) do |form| %>
+      <div class="form-group">
+        <%= form.text_area :comment, required: true, class: "form-control" %>
+      </div>
+
+      <div class="form-group mt-2" id="star">
+        <%= form.hidden_field :star, id: :post_star, class: 'form-control' %>
+        <div id="post_raty"></div>
+      </div>
+      
+      <script>
+        $(document).on('turbolinks:load', function() {
+          let elem = document.querySelector('#post_raty');
+          if (elem == null) return;
+
+          elem.innerHTML = "";
+          let opt = {
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            scoreName: 'comment[star]', // データを送りたいモデル名[カラム名]
+          };
+          raty(elem, opt);
+        });
+      </script>
+      
+      <%= form.submit "コメントを投稿する", class: "btn btn-sm btn-outline-dark mt-2 mb-2" %>
+    <% end %>
+    </div>
   </div>
 
   <div class="col-md-8">
@@ -73,55 +113,7 @@
         <% end %>
       </div>
     </div>
-  </div>
-</div>
-
-<!--コメント機能-->
-<div class="container">
-  <% if flash[:success] %>
-    <div class="alert alert-success">
-      <%= flash[:success] %>
-    </div>
-  <% elsif flash[:error] %>
-    <div class="alert alert-danger">
-      <%= flash[:error] %>
-    </div>
-  <% end %>
-
-<div class="row">
-  <div class="col mt-4">
-    <h5>コメント、レビューを残す</h5>
-    <%= form_with(model: [@post, Comment.new], local: true) do |form| %>
-      <div class="form-group">
-        <%= form.text_area :comment, required: true, class: "form-control" %>
-      </div>
-
-      <div class="form-group mt-2" id="star">
-        <%= form.hidden_field :star, id: :post_star, class: 'form-control' %>
-        <div id="post_raty"></div>
-      </div>
-      
-      <script>
-        $(document).on('turbolinks:load', function() {
-          let elem = document.querySelector('#post_raty');
-          if (elem == null) return;
-
-          elem.innerHTML = "";
-          let opt = {
-            starOn: "<%= asset_path('star-on.png') %>",
-            starOff: "<%= asset_path('star-off.png') %>",
-            scoreName: 'comment[star]', // データを送りたいモデル名[カラム名]
-          };
-          raty(elem, opt);
-        });
-      </script>
-      
-      <%= form.submit "コメントを投稿する", class: "btn btn-sm btn-outline-dark mt-2 mb-2" %>
-    <% end %>
-  </div>
-
-  <div class="col-md-8 mt-4">
-    <% if @comments.any? %>
+     <% if @comments.any? %>
       <h4>コメント一覧</h4> 
       コメント数: <%= @comments.count %>件 
       <% @comments.each do |comment| %>
@@ -175,6 +167,8 @@
     <% end %>
   </div>
 </div>
+
+<!--コメント機能-->
 
 
 </div>
