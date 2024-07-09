@@ -23,6 +23,7 @@
 
 <div class="row">
   <div class="col-md-4">
+    <!--画像-->
    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -109,10 +110,12 @@
       <div class="card-body">
         <h6 class="card-title"><i class="fa-solid fa-tags fa-sm" style="color: #515053;"></i> タグ</h6>
         <% @post.tags.each do |tag| %>
-          <span class="badge bg-info">#<%= tag.name %></span>
+          <span class="badge bg-info" style="color: white;">#<%= tag.name %></span>
         <% end %>
       </div>
     </div>
+    
+    
      <% if @comments.any? %>
       <h4>コメント一覧</h4> 
       コメント数: <%= @comments.count %>件 
@@ -168,7 +171,7 @@
   </div>
 </div>
 
-<!--コメント機能-->
+
 
 
 </div>
