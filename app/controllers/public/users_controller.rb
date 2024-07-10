@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
     def show
      @user = User.find(params[:id])
+     @liked_posts = @user.likes.map(&:post)
     end 
     
     def edit

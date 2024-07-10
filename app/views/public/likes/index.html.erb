@@ -1,0 +1,41 @@
+<div class="container">
+  <% if user_signed_in? && @user == current_user %>
+    <h3>my favorite一覧</h3>
+    <div class="row">
+      <% @liked_posts.each do |like_post| %>
+        <div class="col-md-2 col-sm-4 col-6 mb-2"><!--画面サイズ指定-->
+          <%= link_to post_path(like_post), class: "text-decoration-none text-dark" do %>
+            <div class="card h-100">
+             
+              <%= image_tag url_for(like_post.post_images.first), class: "card-img-top img-thumbnail", style: "object-fit: cover; height: 150px;" %>
+              <div class="card-body text-center">
+                <h6><i class="fa-solid fa-heart fa-sm" style="color: #fd91b1;"></i> <%= like_post.name %></h6>
+                <small class="text-muted"><%= like_post.address.gsub(/\n/, '<br>').html_safe %></small>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <h3><%= @user.name %>'s favorite一覧</h3>
+    <div class="row">
+      <% @liked_posts.each do |like_post| %>
+        <div class="col-md-2 col-sm-4 col-6 mb-2">
+          <%= link_to post_path(like_post), class: "text-decoration-none text-dark" do %>
+            <div class="card h-100">
+             
+              <%= image_tag url_for(like_post.post_images.first), class: "card-img-top img-thumbnail", style: "object-fit: cover; height: 150px;" %>
+              <div class="card-body text-center">
+                <h6><i class="fa-solid fa-heart fa-sm" style="color: #fd91b1;"></i> <%= like_post.name %></h6>
+                <small class="text-muted"><%= like_post.address.gsub(/\n/, '<br>').html_safe %></small>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    
+ 
+  <% end %>
+</div>

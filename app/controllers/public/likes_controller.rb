@@ -10,7 +10,8 @@ class Public::LikesController < ApplicationController
     end 
     
     def index
-     @liked_posts = current_user.likes.map(&:post)
+     @user = User.find(params[:id])
+     @liked_posts = @user.likes.map(&:post)
     end
     
     def show

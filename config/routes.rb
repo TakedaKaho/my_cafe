@@ -32,6 +32,10 @@ Rails.application.routes.draw do
         patch 'out'
         #上記で任意のアクションのルーティング
       end
+      #userいいねした投稿のため
+      member do
+       get 'likes', to: 'likes#index', as: 'likes'
+      end
     end
 
     resources :pick_ups, only: [:show, :index]
@@ -43,11 +47,11 @@ Rails.application.routes.draw do
         #上記で任意のアクションのルーティング
       end
       #postの resources doの中にある＝ネストできてる。
-      resource :likes, only: [:create, :show, :destroy] do
-        collection do
-          get 'index', as:"index"
-        end
-      end
+      resource :likes, only: [:create, :show, :destroy] #do
+        #collection do
+          #get 'index', as:"index"
+        #end
+      #end
       
       resources :comments, only: [:index, :create, :destroy]
     end
