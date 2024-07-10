@@ -26,3 +26,32 @@ window.raty = function(elem,opt) {
   return raty;
 }
 
+
+  document.addEventListener('turbolinks:load', function() {
+    const swiper = new Swiper('.swiper', {
+      loop: true, // ループする
+      autoplay: {
+        delay: 0, // スライド間の待機時間（ミリ秒）
+        disableOnInteraction: false, // ユーザー操作後も自動再生を続ける
+      },
+      speed: 10000, // スライドの速度（ミリ秒）
+      pagination: {
+        
+        clickable: true, // クリック可能にする
+      },
+      
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "3",
+
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 200, //奥行き
+        modifier: 1,
+        slideShadows: true //影あり
+      },
+
+    });
+  });
