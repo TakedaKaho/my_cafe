@@ -12,6 +12,8 @@ class Public::PostsController < ApplicationController
     end 
     
     def search
+     #@post = Post.looks(params[:search], params[:word])
+     @posts = Post.looks(params[:word])
     end 
     
     def tag_search

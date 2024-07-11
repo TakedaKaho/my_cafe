@@ -1,0 +1,42 @@
+<div class="container">
+ <div class="row">
+  <% if params[:word].present? %>
+    <h2 class="col-6 mb-4">『<%= params[:word] %>』に関するcafe一覧</h2>
+  <% else %>
+    <h5><i class="fa-solid fa-magnifying-glass"></i> 『検索キーワード』が入力されていません。</br>
+      ”カフェ名”や"エリア"で調べるのもいいかもしれません<i class="fa-regular fa-face-smile"></i> <i class="fa-solid fa-heart" style="color: #9fbae9;"></i></h5>
+  <% end %>
+  
+    <div class="col-3 mb-4"></div>
+    <div class="col-3 mb-4">
+      <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
+      <%= f.text_field :word %>
+      <%= f.submit "検索", class: "btn-sm btn-dark" %>
+      <% end %>
+    </div>
+ </div>
+
+
+<div class="row">
+  <% if params[:word].present? %>
+    <% @posts.each do |post| %>
+      <div class="col-4 mb-4">
+         <div class="card h-100">
+           <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
+             <%= image_tag url_for(post.post_images.last), class: "card-img-top img-thumbnail", style: "height: 200px; object-fit: cover;" %>
+             <div class="card-body">
+              <h5 class="card-title"><%= post.name %></h5>
+           <% end %>
+              <p class="card-text"><i class="fa-solid fa-location-dot fa-sm" style="color: #ff0f6f;"></i> <%= post.address %></p>
+              <p class="card-text"><strong><i class="fa-solid fa-calendar" style="color: #c6b69f;"></i> 営業日:</strong> <%= post.days_open.gsub(/\n/, '<br>').html_safe %></p>
+              <p class="card-text"><strong><i class="fa-solid fa-clock" style="color: #c6b69f;"></i> 営業時間:</strong> <%= post.hours.gsub(/\n/, '<br>').html_safe %></p>
+             </div>
+         </div>
+      </div>
+    <% end %>
+  <% else %>
+   
+  <% end %>
+</div>
+
+</div>

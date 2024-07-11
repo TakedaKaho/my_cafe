@@ -39,5 +39,9 @@ class Post < ApplicationRecord
   def liked_by?(user)
     likes.exists?(user_id: user.id)
   end
+  #検索　部分一致のみ・対象はカフェ名・住所・営業日・営業時間
+  def self.looks(word)
+    where("name LIKE ? OR address LIKE ? OR days_open LIKE ? OR hours LIKE ?", "%#{word}%", "%#{word}%", "%#{word}%", "%#{word}%")
+  end
   
 end
