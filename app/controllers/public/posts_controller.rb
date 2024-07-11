@@ -1,8 +1,17 @@
 class Public::PostsController < ApplicationController
     
     def index
-     @posts = Post.includes(:comments).page(params[:page]).per(12) # データベースから投稿を取得（例：コメントも含める）平均評価のため
+     if params[:latest]
+       @posts = Post.latest.includes(:comments).page(params[:page]).per(12)
+     elsif params[:old]
+       @posts = Post.old.includes(:comments).page(params[:page]).per(12)
+     elsif params[:star_count]
+       @posts = Post.highest_rated.includes(:comments).page(params[:page]).per(12)
+     else
+       @posts = Post.includes(:comments).page(params[:page]).per(12)
+     end
     end
+
     
     def show
      @post = Post.find(params[:id])
