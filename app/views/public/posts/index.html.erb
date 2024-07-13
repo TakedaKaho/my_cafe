@@ -14,11 +14,19 @@
         </div>
       </div>
     </div>
+    
+    <!--<div class="col-3 mb-4">
+      <= form_with url: tag_search_posts_path, local: true, method: :get do |f| %>
+       <= f.text_field :tag, placeholder: "タグ検索" %>
+       %= f.submit "検索", class: "btn-sm btn-info" %>
+      < end %>
+    </div>-->
+
 
     <div class="col-3 mb-4">
       <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
-      <%= f.text_field :word %>
-      <%= f.submit "検索", class: "btn-sm btn-dark" %>
+       <%= f.text_field :word, placeholder: "キーワード検索" %>
+       <%= f.submit "検索", class: "btn-sm btn-dark" %>
       <% end %>
     </div>
   </div>

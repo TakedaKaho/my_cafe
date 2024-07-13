@@ -21,8 +21,21 @@
           <%= form.label :body, "自己紹介文" %>
           <%= form.text_area :body, class: "form-control", placeholder: "自己紹介文を入力してください" %>
         </div>
+        <div class="form-group">
+          <%= form.label :email, "メールアドレス" %>
+          <%= form.email_field :email, class: "form-control", placeholder: "メールアドレスを入力してください" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :password, "パスワード" %>
+          <%= form.password_field :password, class: "form-control", placeholder: "パスワードを入力してください" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :password_confirmation, "パスワード確認" %>
+          <%= form.password_field :password_confirmation, class: "form-control", placeholder: "パスワードをもう一度入力してください" %>
+        </div>
         <%= form.submit "変更保存", class: "btn btn-sm btn-outline-dark" %>
       </div>
     </div>
   <% end %>
 </div>
+

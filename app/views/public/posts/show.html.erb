@@ -1,12 +1,11 @@
 <div class="container">
 <div class="row">
-  <div class="col-1"></div>
   <div class="col-3 mb-2 mt-2">
     <span style="font-size: 2em;"><i class="fa-solid fa-caret-right"></i> <%= @post.name %></span>
   </div>
  
   
-  <div class ="col-4"></div>
+  <div class ="col-5"></div>
   <div class="col-1 mt-4">
     <!--いいね機能-->
     <div id="like_buttons_<%= @post.id %>">
@@ -108,10 +107,14 @@
     </table>
     <div class="card" style="width: 500px;">
       <div class="card-body">
-        <h6 class="card-title"><i class="fa-solid fa-tags fa-sm" style="color: #515053;"></i> タグ</h6>
+        <h6 class="card-title"><i class="fa-solid fa-tags fa-sm" style="color: #515053;"></i> タグ ( clickすると関連投稿が表示されます<i class="fa-solid fa-fire" style="color: #ff0040;"></i> )</h6>
+        
         <% @post.tags.each do |tag| %>
-          <span class="badge bg-info" style="color: white;">#<%= tag.name %></span>
+         <%= link_to tag_search_posts_path(tag: tag.name), class: "badge bg-info", style: "color: white;" do %>
+          #<%= tag.name %>
+         <% end %>
         <% end %>
+
       </div>
     </div>
     
@@ -125,13 +128,13 @@
             <div class="d-flex">
               <% if comment.user.present? && comment.user.profile_image.attached? %>
                 <div class="me-3">
-                  <%= image_tag url_for(comment.user.profile_image), class: "avatar-img rounded-circle", style: "width: 50px; height: 50px; object-fit: cover;" %>
-                  <p class="text-center"><small class="text-muted"><%= comment.user.name if comment.user %></small></p>
+                  <%= image_tag url_for(comment.user.profile_image), class: "avatar-img rounded-circle mr-4", style: "width: 50px; height: 50px; object-fit: cover;" %>
+                  <p class="text-center mr-4"><small class="text-muted"><%= comment.user.name if comment.user %></small></p>
                 </div>
               <% else %>
                 <div class="me-3">
-                  <%= image_tag "no_image.jpg", class: "avatar-img rounded-circle", style: "width: 50px; height: 50px; object-fit: cover;" %>
-                  <p class="text-center"><small class="text-muted">ゲストユーザー</small></p>
+                  <%= image_tag "no_image.jpg", class: "avatar-img rounded-circle mr-4", style: "width: 50px; height: 50px; object-fit: cover;" %>
+                  <p class="text-center mr-4"><small class="text-muted"><%= comment.user.name if comment.user %></small></p>
                 </div>
               <% end %>
               <div class="flex-grow-1">

@@ -18,7 +18,11 @@
         <div class="card-body">
           <h4 class="card-title">Name</h4>
           <p class="card-text"><%= @user.name %></p>
-          <p class="card-text"><%= @user.body.gsub(/\n/, '<br>').html_safe %></p>
+          <% if @user.body.present? %>
+           <p class="card-text"><%= @user.body.gsub(/\n/, '<br>').html_safe %></p>
+          <% else %>
+           <p class="card-text">自己紹介文がまだ登録されていません。</p>
+          <% end %>
         </div>
       </div>
       
