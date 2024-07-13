@@ -4,20 +4,20 @@
    <div class="col-md-6">
        
      <% if @pick_up.errors.any? %>
-          <div id="error_explanation" class="alert alert-danger">
-            <h6><%= pluralize(@pick_up.errors.count, "件のエラー") %> により投稿できませんでした:</h6>
-            <ul>
-              <% @pick_up.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+       <div id="error_explanation" class="alert alert-danger">
+         h6><%= pluralize(@pick_up.errors.count, "件のエラー") %> により投稿できませんでした:</h6>
+         <ul>
+          <% @pick_up.errors.full_messages.each do |message| %>
+           <li><%= message %></li>
+          <% end %>
+         </ul>
+       </div>
+     <% end %>
 
       <%= form_with model: @pick_up, url: admin_pick_ups_path, method: :post, local: true, multipart: true do |form| %>
       
        <div class="mb-3">
-          <%= form.label :pick_up_images, "画像（１枚〜3枚）", class: "form-label" %>
+          <%= form.label :pick_up_images, "画像:3枚", class: "form-label" %>
           <%= form.file_field :pick_up_images, multiple: true, accept: "image/*", class: "form-control" %>
        </div>
         
