@@ -34,10 +34,10 @@
   </ol>
   <div class="carousel-inner">
    <% @post.post_images.each_with_index do |image, index| %>
-          <div class="carousel-item <%= 'active' if index == 0 %>">
-            <%= image_tag url_for(image), class: "d-block w-100", style: "width: 300px; height: 280px; object-fit: cover;", alt: "投稿画像" %>
-          </div>
-        <% end %>
+    <div class="carousel-item <%= 'active' if index == 0 %>">
+      <%= image_tag url_for(image), class: "d-block w-100", style: "width: 300px; height: 280px; object-fit: cover;", alt: "投稿画像" %>
+    </div>
+   <% end %>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -48,6 +48,7 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
     <div>
        <% if flash[:success] %>
       <div class="alert alert-success">

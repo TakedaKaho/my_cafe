@@ -1,2 +1,28 @@
-<h1>今週のPickUp Cafe</h1>
-<h1>PickUp一覧</h1>
+<div class="container">
+  <h2>今週のPickUp Cafe <i class="fa-solid fa-heart fa-sm" style="color: #ff295e;"></i></h2>
+  
+  <h3 class="text-center">過去のPickUp一覧</h3>
+  
+  <table class="table text-center">
+    <thead>
+      <tr>
+        <th>投稿日</th>
+        <th>記事名</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pick_ups.each do |pick_up| %>
+        <tr>
+          <td><%= pick_up.created_at.strftime("%Y-%m-%d") %></td>
+          <td><%= pick_up.title %></td>
+          <td>
+            <%= link_to pick_up_path(pick_up.id), class: "btn btn-sm btn-outline-secondary" do %>
+              記事詳細へ
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

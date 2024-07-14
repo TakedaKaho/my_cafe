@@ -36,7 +36,7 @@ class Admin::PickUpsController < ApplicationController
     def destroy
      @pick_up = PickUp.find(params[:id])
      @pick_up.destroy
-    redirect_to admin_pick_ups_path, notice: "PickUp記事を削除しました。"
+    redirect_to admin_pick_ups_path, pick_destroy_notice: "PickUp記事を削除しました。"
     end 
     
   private
