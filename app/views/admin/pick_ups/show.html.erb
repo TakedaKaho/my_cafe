@@ -41,12 +41,15 @@
         </div>
         
         <div class="d-flex justify-content-center mt-3">
-        <%= link_to edit_admin_pick_up_path(@pick_up), class: "btn  btn-outline-dark mr-1" do %>
-          編集 <i class="fa-regular fa-pen-to-square"></i>
-        <% end %>
-        <%= link_to admin_pick_up_path(@pick_up), method: :delete, data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-outline-danger ml-1" do %>
-          消去 <i class="fa-solid fa-trash-can"></i>
-        <% end %>
+          <%= link_to  admin_pick_ups_path, class: "btn  btn-outline-dark mr-1" do %>
+            <i class="fa-solid fa-rotate-left"></i> 記事一覧へ
+          <% end %>
+          <%= link_to edit_admin_pick_up_path(@pick_up), class: "btn  btn-outline-dark mr-1 ml-1" do %>
+            編集 <i class="fa-regular fa-pen-to-square"></i>
+          <% end %>
+          <%= link_to admin_pick_up_path(@pick_up), method: :delete, data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-outline-danger ml-1" do %>
+            消去 <i class="fa-solid fa-trash-can"></i>
+          <% end %>
       </div>
      
     </div>

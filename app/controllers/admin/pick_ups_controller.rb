@@ -25,12 +25,12 @@ class Admin::PickUpsController < ApplicationController
     end 
     
     def update
-       @pick_up = PickUp.find(params[:id])
-     if @pick_up.update(pick_up_params)
-      redirect_to admin_pick_up_path(@pick_up), notice: "PickUp記事を更新しました。"
-     else
-      render :edit
-     end
+     @pick_up = PickUp.find(params[:id])
+      if @pick_up.update(pick_up_params)
+       redirect_to admin_pick_up_path(@pick_up), notice: "PickUp記事を更新しました。"
+      else
+       render :edit
+      end
     end 
     
     def destroy

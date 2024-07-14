@@ -2,14 +2,16 @@
   <% if admin_signed_in? %>
   <div class="border-bottom row">
   
-    <div class="col-3">
+    <div class="col-2">
       <%= link_to admin_path do %>
         <%= image_tag '4.png', size: '200x133' %>
       <% end %>
     </div>
 
-    <h2 class="col-3" style="margin-top: 50px !important;">管理者用ページ</h2>
-    <div class="col-3"></div>
+    <div class="col-2">
+      <%= image_tag '管理2.png', size: '200x133' %>
+    </div>
+    <div class="col-5"></div>
     <div class="col-3 d-flex justify-content-center align-items-center">
       <%= link_to destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark mt-auto mr-2 mb-auto ml-4", style: "font-size: 15px; padding: 10px 20px;" do %>
       <i class="fa-solid fa-right-from-bracket"></i>Log Out
