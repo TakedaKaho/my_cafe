@@ -9,14 +9,14 @@
     <div class="card-body">
       <div class="d-flex justify-content-end mb-3 mr-4">
         <%= link_to new_admin_pick_up_path do %>
-         <i class="fa-solid fa-plus fa-lg" style="color: #d0cac8;"></i>
+         <i class="fa-solid fa-plus fa-lg" style="color: #d0cac8;"></i> <i class="fa-regular fa-newspaper fa-xl" style="color: #72cf96;"></i>
         <% end %>
       </div>
       
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>投稿日</th>
             <th>記事名</th>
             <th></th>
           </tr>
@@ -25,7 +25,7 @@
         <tbody>
          <% @pick_ups.each do |pick_up| %>
           <tr>
-            <th><%= pick_up.id %></th>
+            <th><%= pick_up.created_at.strftime("%Y-%m-%d") %></th>
             <th><%= pick_up.title %></th>
             <th>
              <%= link_to admin_pick_up_path(pick_up.id), class: "btn btn-sm btn-outline-secondary" do %>
