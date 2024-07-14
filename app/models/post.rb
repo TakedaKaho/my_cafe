@@ -57,4 +57,5 @@ class Post < ApplicationRecord
     where("name LIKE ? OR address LIKE ? OR days_open LIKE ? OR hours LIKE ?", "%#{word}%", "%#{word}%", "%#{word}%", "%#{word}%")
   end
   
+  
 end
