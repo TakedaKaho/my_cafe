@@ -55,24 +55,25 @@
 
 
 <div class="container">
-<h2 class="text-center about pb-3 mt-4 mb-4"><i class="fa-solid fa-cat"></i> NEW POST <i class="fa-solid fa-cat fa-flip-horizontal"></i></h2>
+  <h2 class="text-center about pb-3 mt-4 mb-4"><i class="fa-solid fa-cat"></i> NEW POST <i class="fa-solid fa-cat fa-flip-horizontal"></i></h2>
 
-<div class="swiper">
-  <div class="swiper-wrapper">
-    <% @posts.each do |post| %>
-      <div class="swiper-slide">
-        <div class="card h-300">
-          <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
-            <%= image_tag url_for(post.post_images.first), class: "card-img-top img-thumbnail", style: "object-fit: cover; height: 300px;" %>
-            <div class="card-body text-center">
-              <h5 class="card-title"><%= post.name %></h5>
-              <h6 class="card-title text-muted"><i class="fa-solid fa-location-dot fa-xs" style="color: #ff1f1f;"></i> <%= post.address%></h6>
-            </div>
-          <% end %>
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <% @posts.each do |post| %>
+        <div class="swiper-slide">
+          <div class="card h-300">
+            <!--三項演算子・構文エラーでif文使えなかった為-->
+            <% link_path = current_user&.admin? ? post_path(post) : admin_post_path(post) %>
+            <%= link_to link_path, class: "text-decoration-none text-dark" do %>
+              <%= image_tag url_for(post.post_images.first), class: "card-img-top img-thumbnail", style: "object-fit: cover; height: 300px;" %>
+              <div class="card-body text-center">
+                <h5 class="card-title"><%= post.name %></h5>
+                <h6 class="card-title text-muted"><i class="fa-solid fa-location-dot fa-xs" style="color: #ff1f1f;"></i> <%= post.address %></h6>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-
-</div>
 </div>
