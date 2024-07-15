@@ -1,4 +1,5 @@
 class Admin::PostsController < ApplicationController
+ before_action :authenticate_admin!
     
     def new
      @post = Post.new
@@ -8,7 +9,8 @@ class Admin::PostsController < ApplicationController
       @post = Post.new(post_params.except(:tag_ids))
      if @post.save
       @post.tag_ids = params[:post][:tag_ids] if params[:post][:tag_ids].present?
-      redirect_to admin_post_path(@post.id), notice: 'カフェが投稿されました。'
+      redirect_to admin_post_path(@post.id)
+      flash[:post_notice]="カフェが投稿されました。"
      else
       render :new
      end

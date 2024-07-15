@@ -1,7 +1,17 @@
-<div class="">
-    <%= flash[:post_edit_notice] %>
-</div>
 <div class="container">
+  
+<% if flash[:post_notice].present? %>
+ <div class="alert alert-success">
+  <%= flash[:post_notice] %>
+ </div>
+<% end %>
+
+<% if flash[:post_edit_notice].present? %>
+ <div class="alert alert-success">
+  <%= flash[:post_edit_notice] %>
+ </div>
+<% end %>
+
 <div class="row">
 
     <div class="col-3 mb-2 mt-2">

@@ -1,7 +1,11 @@
 <div class="container">
 
 <div class="ml-4">
-  <%= flash[:comment_destroy_notice] %>
+  <% if flash[:comment_destroy_notice].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:comment_destroy_notice] %>
+  </div>
+<% end %>
 </div>
 
 <h1>コメント一覧</h1>

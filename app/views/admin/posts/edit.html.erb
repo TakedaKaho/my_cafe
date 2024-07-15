@@ -5,6 +5,7 @@
         <div class="form-group">
           <%= form.label :post_images, "カフェ画像" %>
           <%= form.file_field :post_images, multiple: true, accept: "image/*", class: "form-control-file" %>
+          <button type="button" id="add-file-field" class=" ml-2 mt-2 btn btn-sm btn-outline-secondary">画像を追加</button>
         </div>
         
           <% @post.post_images.each do |image| %>
@@ -54,3 +55,18 @@
     </div>
   <% end %>
 </div>
+
+
+<!--画像追加ボタン-->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const addButton = document.getElementById("add-file-field");
+  addButton.addEventListener("click", function() {
+    const fileFields = document.querySelectorAll("input[type='file']");
+    if (fileFields.length < 3) { // 3つ未満の場合のみ追加
+      const newFileField = fileFields[0].cloneNode(); // ここでは最初のフィールドをクローンしていますが、必要に応じて変更してください
+      fileFields[0].parentNode.insertBefore(newFileField, fileFields[0].nextSibling);
+    }
+  });
+});
+</script>

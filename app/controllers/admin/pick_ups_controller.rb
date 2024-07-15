@@ -1,4 +1,5 @@
 class Admin::PickUpsController < ApplicationController
+ before_action :authenticate_admin!
     def new
      @pick_up = PickUp.new
     end 
