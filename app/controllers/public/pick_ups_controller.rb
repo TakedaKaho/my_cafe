@@ -1,6 +1,8 @@
 class Public::PickUpsController < ApplicationController
     def index
-     @pick_ups = PickUp.all.order(created_at: :desc)
+     @latest_pick_up = PickUp.order(created_at: :desc).first
+     #allから最新の記事抜いてる
+     @pick_ups = PickUp.where.not(id: @latest_pick_up.id).order(created_at: :desc)
     end 
     
     def show
