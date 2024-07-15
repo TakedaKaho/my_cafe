@@ -9,7 +9,7 @@
     </div>
 
     <div class="col-2">
-      <%= image_tag 'admin2.png', size: '200x133' %>
+      <%= image_tag 'admin2.png', size: '190x120' %>
     </div>
     <div class="col-5"></div>
     <div class="col-3 d-flex justify-content-center align-items-center">
@@ -25,7 +25,7 @@
 
     <div class="mt-1 mr-4 mb-1 ml-4 col-3 d-flex align-items-center">
       <%= link_to root_path do %>
-        <%= image_tag '3.png', size: '200x133' %>
+        <%= image_tag '3.png', size: '190x120' %>
       <% end %>
     </div>
     
@@ -50,29 +50,24 @@
   </div>
   <div class="row mt-3"></div>
 
-    
+ 
+  
   <% else %>
   
     <div class="row border-bottom mt-3">
     <div class="col-3">
       <%= link_to root_path do %>
-        <%= image_tag '3.png', size: '200x133' %>
+        <%= image_tag '3.png', size: '190x120' %>
       <% end %>
     </div>
     <div class ="col-1"></div>
-    <div class="col-2 d-flex justify-content-center align-items-center">
-      <%= link_to "ゲストログイン後で", root_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-2 mb-auto ml-2" %>
+    <div class="col-7 d-flex justify-content-end align-items-center">
+      <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto" %>
+      <%= link_to "Log In", new_user_session_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto"%>
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto" %>
+      <%= link_to "管理者ログイン", new_admin_session_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto" %>
     </div>
-    <div class="col-2 d-flex justify-content-center align-items-center">
-      <%= link_to "Log In", new_user_session_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-2 mb-auto ml-2"%>
-    </div>
-    <div class="col-2 d-flex justify-content-center align-items-center">
-      <%= link_to "新規登録", new_user_registration_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-2 mb-auto ml-2" %>
-    </div>
-   <div class="col-2 d-flex justify-content-center align-items-center">
-      <%= link_to "管理者ログイン", new_admin_session_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-2 mb-auto ml-2" %>
-    </div>
-    <div class="row mt-3"></div>
+
     </div>
     
     

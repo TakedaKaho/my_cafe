@@ -1,4 +1,6 @@
 class Public::UsersController < ApplicationController
+ before_action :authenticate_user!
+ 
     def show
      @user = User.find(params[:id])
      @liked_posts = @user.likes.map(&:post)
@@ -11,7 +13,7 @@ class Public::UsersController < ApplicationController
     def update
       @user = User.find(params[:id])
       if @user.update(user_params)
-       flash[:edit_notice] = "変更内容が正常に保存されました"
+       flash[:edit_notice] = "プロフィールが正常に変更されました"
        redirect_to user_path(@user)
       else
        render :edit

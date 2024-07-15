@@ -1,5 +1,6 @@
 class Public::CommentsController < ApplicationController
   before_action :set_post, only: [:create, :destroy]
+  before_action :authenticate_user!
 
   def create
     @comment = @post.comments.new(comment_params)

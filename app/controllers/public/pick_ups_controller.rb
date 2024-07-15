@@ -1,4 +1,5 @@
 class Public::PickUpsController < ApplicationController
+ before_action :authenticate_user!
     def index
      @latest_pick_up = PickUp.order(created_at: :desc).first
      #allから最新の記事抜いてる

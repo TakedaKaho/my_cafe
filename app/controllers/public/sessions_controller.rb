@@ -18,13 +18,20 @@ class Public::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to user_path(user)
+    flash[:guest_notice]="ゲストでログインしました。"
+  end
 
-  protected
 
-   def reject_user
+protected
+
+ def reject_user
     @user = User.find_by(email: params[:user][:email])
     #入力されたuser情報とdb内のuser情報調べて&&(どちらも正しい、つまりある場合は)
-    if @user && @user.valid_password?(params[:user][:password])
+  if @user && @user.valid_password?(params[:user][:password])
       #trueかfalseかで処理変えますよー
     if @user.is_deleted
       flash[:out_notice] = "退会済みです。再度ご登録をしてご利用ください。"
@@ -40,7 +47,6 @@ class Public::SessionsController < Devise::SessionsController
     redirect_to new_user_session_path
   end
  end
-
 
 
   def after_sign_in_path_for(resource)
