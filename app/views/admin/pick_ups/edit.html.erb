@@ -1,46 +1,81 @@
 <div class="container">
   <%= form_with model: @pick_up, url: admin_pick_up_path(@pick_up), method: :patch, local: true, multipart: true do |form| %>
-   <div class="mb-3">
-          <%= form.label :pick_up_images, "画像:3枚", class: "form-label" %>
-          <%= form.file_field :pick_up_images, multiple: true, accept: "image/*", class: "form-control" %>
-          <button type="button" id="add-file-field" class=" ml-2 mt-2 btn btn-sm btn-outline-secondary">画像を追加</button>
-       </div>
-       
-       <% @pick_up.pick_up_images.each do |image| %>
-            <%= image_tag url_for(image), class: "img-thumbnail mt-2", style: "width: 90px; height: 90px; object-fit: cover;" %>
-          <% end %>
-        
-       <div class="mb-3">
-        <%= form.label :title, "タイトル:", class: "form-label" %>
-        <%= form.text_field :title, required: true, class: "form-control" %>
-       </div>
-       
-       <div class="mb-3">
-        <%= form.label :body, "本文:", class: "form-label" %>
-        <%= form.text_area :body, required: true, class: "form-control" %>
-       </div>
-       
-       <div class="mb-3">
-          <%= form.label :post_id, "関連するカフェ:", class: "form-label" %>
-          <%= form.collection_select :post_id, Post.all, :id, :name, { prompt: "カフェを選択してください" }, class: "form-control" %>
-        </div>
-        
-        <div class="mb-3 text-center">
-          <%= form.submit "変更保存", class: "btn btn-primary" %>
-        </div>
+    <div class="mb-3">
+      <%= form.label :pick_up_images, "画像:3枚", class: "form-label" %>
+      <%= form.file_field :pick_up_images, multiple: true, accept: "image/*", id: "pick_up_image_input", class: "form-control" %>
+      <button type="button" id="add-file-field" class="ml-2 mt-2 btn btn-sm btn-outline-secondary">画像を追加</button>
+    </div>
+    
+    <h6>< preview ></h6>
+    <div id="image_preview"></div>
+
+    <h6>< 現在の画像 ></h6>
+    <% @pick_up.pick_up_images.each do |image| %>
+      <%= image_tag url_for(image), class: "img-thumbnail mt-2", style: "width: 100px; height: 100px; object-fit: cover;" %>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :title, "タイトル:", class: "form-label" %>
+      <%= form.text_field :title, required: true, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :body, "本文:", class: "form-label" %>
+      <%= form.text_area :body, required: true, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :post_id, "関連するカフェ:", class: "form-label" %>
+      <%= form.collection_select :post_id, Post.all, :id, :name, { prompt: "カフェを選択してください" }, class: "form-control" %>
+    </div>
+
+    <div class="mb-3 text-center">
+      <%= form.submit "変更保存", class: "btn btn-primary" %>
+    </div>
   <% end %>
 </div>
 
-<!--画像追加ボタン-->
+
+<!--画像追加ボタン・プレビュー-->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const addButton = document.getElementById("add-file-field");
+  const imagePreviewContainer = document.getElementById("image_preview");
+
   addButton.addEventListener("click", function() {
     const fileFields = document.querySelectorAll("input[type='file']");
     if (fileFields.length < 3) { // 3つ未満の場合のみ追加
-      const newFileField = fileFields[0].cloneNode(); // ここでは最初のフィールドをクローンしていますが、必要に応じて変更してください
+      const newFileField = fileFields[0].cloneNode(); // 最初のフィールドをクローン
       fileFields[0].parentNode.insertBefore(newFileField, fileFields[0].nextSibling);
+
+      newFileField.addEventListener('change', handleFileSelect);
     }
   });
+
+  document.querySelectorAll("input[type='file']").forEach(fileField => {
+    fileField.addEventListener('change', handleFileSelect);
+  });
+
+  function handleFileSelect(event) {
+    const files = event.target.files;
+
+    Array.from(files).forEach(file => {
+      const reader = new FileReader();
+
+      reader.onload = function(event) {
+        const imgElement = document.createElement('img');
+        imgElement.src = event.target.result;
+        imgElement.width = 100;
+        imgElement.height = 100;
+        imgElement.classList.add('img-thumbnail', 'mt-2');
+        imgElement.style.objectFit = 'cover';
+
+        imagePreviewContainer.appendChild(imgElement);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
 });
+
 </script>

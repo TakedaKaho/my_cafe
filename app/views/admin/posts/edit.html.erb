@@ -4,14 +4,18 @@
       <div class="col-md-4">
         <div class="form-group">
           <%= form.label :post_images, "カフェ画像" %>
-          <%= form.file_field :post_images, multiple: true, accept: "image/*", class: "form-control-file" %>
-          <button type="button" id="add-file-field" class=" ml-2 mt-2 btn btn-sm btn-outline-secondary">画像を追加</button>
+          <%= form.file_field :post_images, multiple: true, accept: "image/*", id: "profile_image_input", class: "form-control-file" %>
+          <button type="button" id="add-file-field" class="ml-2 mt-2 btn btn-sm btn-outline-secondary">画像を追加</button>
         </div>
         
-          <% @post.post_images.each do |image| %>
-            <%= image_tag url_for(image), class: "img-thumbnail mt-2", style: "width: 90px; height: 90px; object-fit: cover;" %>
-          <% end %>
-          
+        <h6>< preview ></h6>
+        <div id="image_preview"></div>
+        
+        <h6>< 現在の画像 ></h6>
+        <% @post.post_images.each do |image| %>
+          <%= image_tag url_for(image), class: "img-thumbnail mt-2", style: "width: 90px; height: 90px; object-fit: cover;" %>
+        <% end %>
+
         <div class="card mb-3">
           <div class="card-body">
             <%= form.label :tag_ids, "タグ" %>
@@ -57,16 +61,46 @@
 </div>
 
 
-<!--画像追加ボタン-->
+
+<!--画像追加ボタンとプレビュー-->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const addButton = document.getElementById("add-file-field");
+  const imagePreviewContainer = document.getElementById("image_preview");
+
   addButton.addEventListener("click", function() {
     const fileFields = document.querySelectorAll("input[type='file']");
     if (fileFields.length < 3) { // 3つ未満の場合のみ追加
-      const newFileField = fileFields[0].cloneNode(); // ここでは最初のフィールドをクローンしていますが、必要に応じて変更してください
+      const newFileField = fileFields[0].cloneNode(); // 最初のフィールドをクローン
       fileFields[0].parentNode.insertBefore(newFileField, fileFields[0].nextSibling);
+
+      newFileField.addEventListener('change', handleFileSelect);
     }
   });
+
+  document.querySelectorAll("input[type='file']").forEach(fileField => {
+    fileField.addEventListener('change', handleFileSelect);
+  });
+
+  function handleFileSelect(event) {
+    const files = event.target.files;
+
+    Array.from(files).forEach(file => {
+      const reader = new FileReader();
+
+      reader.onload = function(event) {
+        const imgElement = document.createElement('img');
+        imgElement.src = event.target.result;
+        imgElement.width = 90;
+        imgElement.height = 90;
+        imgElement.classList.add('img-thumbnail', 'mt-2');
+        imgElement.style.objectFit = 'cover';
+
+        imagePreviewContainer.appendChild(imgElement);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
 });
 </script>

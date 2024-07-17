@@ -1,16 +1,18 @@
 <div class="container">
-  <%= form_with(model: @user, local: true) do |form| %>
+  <%= form_with(model: @user, local: true, multipart: true) do |form| %>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
           <%= form.label :profile_image, "プロフィール画像" %>
-          <%= form.file_field :profile_image, accept: "image/*", class: "form-control-file" %>
+          <%= form.file_field :profile_image, accept: "image/*", class: "form-control-file", id: "profile_image_input" %>
         </div>
-        <% if @user.profile_image.attached? %>
-          <%= image_tag url_for(@user.profile_image), class: "img-thumbnail mt-2" %>
-        <% else %>
-          <%= image_tag "no_image.jpg", class: "img-thumbnail mt-2", size: "200x200" %>
-        <% end %>
+        <div id="image_preview" class="mb-3">
+          <% if @user.profile_image.attached? %>
+            <%= image_tag url_for(@user.profile_image), class: "img-thumbnail mt-2", style: "width: 200px; height: 200px; object-fit: cover;"  %>
+          <% else %>
+            <%= image_tag "no_image.jpg", class: "img-thumbnail mt-2", style: "width: 200px; height: 200px; object-fit: cover;" %>
+          <% end %>
+        </div>
       </div>
       <div class="col-md-8">
         <div class="form-group">
@@ -39,3 +41,37 @@
   <% end %>
 </div>
 
+<!--画像追加ボタン-->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const imageInput = document.getElementById('profile_image_input');
+  const imagePreviewContainer = document.getElementById('image_preview');
+
+  imageInput.addEventListener('change', function(event) {
+    const files = event.target.files;
+
+    // 既存のプレビュー画像を削除
+    while (imagePreviewContainer.firstChild) {
+      imagePreviewContainer.removeChild(imagePreviewContainer.firstChild);
+    }
+
+    // 新しいプレビュー画像を表示
+    Array.from(files).forEach(file => {
+      const reader = new FileReader();
+
+      reader.onload = function(event) {
+        const imgElement = document.createElement('img');
+        imgElement.src = event.target.result;
+        imgElement.width = 200;
+        imgElement.height = 200;
+        imgElement.classList.add('img-thumbnail', 'mt-2');
+        imgElement.style.objectFit = 'cover';
+
+        imagePreviewContainer.appendChild(imgElement);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  });
+});
+</script>
