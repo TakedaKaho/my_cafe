@@ -42,8 +42,8 @@
           <% end %>
         <% end %>
       </div>
-      
-      <%= render partial: 'replies', locals: { comment: reply } %> <%# 再帰的に呼び出し %>
+      <%# 再帰的に呼び出し %>
+      <%= render partial: 'replies', locals: { comment: reply } %> 
     </div>
   </div>
 <% end %>
