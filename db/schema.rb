@@ -64,8 +64,10 @@ ActiveRecord::Schema.define(version: 2024_07_03_132318) do
     t.integer "user_id", null: false
     t.integer "star"
     t.string "comment", null: false
+    t.integer "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
   end
 
   create_table "likes", force: :cascade do |t|

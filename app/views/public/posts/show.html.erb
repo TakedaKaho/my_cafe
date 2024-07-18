@@ -1,11 +1,10 @@
 <div class="container">
+  
 <div class="row">
-  <div class="col-3 mb-2 mt-2">
+  <div class="col-5 mb-2 mt-2">
     <span style="font-size: 2em;"><i class="fa-solid fa-caret-right"></i> <%= @post.name %></span>
   </div>
- 
-  
-  <div class ="col-5"></div>
+  <div class ="col-3"></div>
   
   <div class="col-1 mt-4">
     <!--いいね機能-->
@@ -21,6 +20,7 @@
       <i class="fa-regular fa-hand-point-right fa-lg"></i> いいね<i class="fa-solid fa-heart fa-xs" style="color: #ff1a25;"></i>したユーザ一覧
     <% end %>
   </div>
+  
 </div>
 
 <div class="row">
@@ -50,13 +50,19 @@
 </div>
 
     <div>
-       <% if flash[:success] %>
+    <% if flash[:success] %>
       <div class="alert alert-success">
         <%= flash[:success] %>
       </div>
     <% elsif flash[:error] %>
       <div class="alert alert-danger">
         <%= flash[:error] %>
+      </div>
+    <% end %>
+    
+    <% if flash[:destroy_notice].present? %>
+      <div class="alert alert-warning">
+    <%= flash[:destroy_notice] %>
       </div>
     <% end %>
     
@@ -130,62 +136,95 @@
     </div>
     
     
-     <% if @comments.any? %>
-      <h4>コメント一覧</h4> 
-      コメント数: <%= @comments.count %>件 
-      <% @comments.each do |comment| %>
-        <div class="card mb-1">
-          <div class="card-body">
-            <div class="d-flex">
-              <% if comment.user.present? && comment.user.profile_image.attached? %>
-                <div class="me-3">
-                  <%= image_tag url_for(comment.user.profile_image), class: "avatar-img rounded-circle mr-4", style: "width: 50px; height: 50px; object-fit: cover;" %>
-                  <p class="text-center mr-4"><small class="text-muted"><%= comment.user.name if comment.user %></small></p>
-                </div>
-              <% else %>
-                <div class="me-3">
-                  <%= image_tag "no_image.jpg", class: "avatar-img rounded-circle mr-4", style: "width: 50px; height: 50px; object-fit: cover;" %>
-                  <p class="text-center mr-4"><small class="text-muted"><%= comment.user.name if comment.user %></small></p>
-                </div>
-              <% end %>
-              <div class="flex-grow-1">
-                <p class="card-text"><small class="text-muted"><%= comment.comment.gsub(/\n/, '<br>').html_safe %></small></p>
-              </div>
-              
-              <div id="star_<%= @post.id %>_<%= comment.id %>"></div>
-              <script>
-                $(document).on('turbolinks:load', function() {
-                  let elem = document.querySelector('#star_<%= @post.id %>_<%= comment.id %>');
-                  if (elem == null) return;
-                  
-                  elem.innerHTML = "";
-                  let opt = {  
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    score: '<%= comment.star %>',
-                    readOnly: true,
-                  };
-                  raty(elem, opt);
-                });
-              </script>
-              
-              <div class="ms-auto d-flex flex-column align-items-end">
-                <% if current_user == comment.user %>
-                  <%= button_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-dark btn-sm mb-2" %>
-                <% end %>
-                <p class="card-text mb-0"><small class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d") %></small></p>
-              </div>
+<% if @comments.any? %>
+  <h4>コメント一覧</h4>
+  コメント数: <%= @comments.count %>件 
+  <% @comments.where(parent_id: nil).each do |comment| %>
+    <div class="card mb-1">
+      <div class="card-body">
+        <div class="d-flex">
+          <% if comment.user.present? && comment.user.profile_image.attached? %>
+            <div class="me-3">
+              <%= image_tag url_for(comment.user.profile_image), class: "avatar-img rounded-circle mr-4", style: "width: 50px; height: 50px; object-fit: cover;" %>
+              <p class="text-center mr-4"><small class="text-muted"><%= comment.user.name if comment.user %></small></p>
             </div>
+          <% else %>
+            <div class="me-3">
+              <%= image_tag "no_image.jpg", class: "avatar-img rounded-circle mr-4", style: "width: 50px; height: 50px; object-fit: cover;" %>
+              <p class="text-center mr-4"><small class="text-muted"><%= comment.user.name if comment.user %></small></p>
+            </div>
+          <% end %>
+          <div class="flex-grow-1">
+            <p class="card-text"><small class="text-muted"><%= comment.comment.gsub(/\n/, '<br>').html_safe %></small></p>
+          </div>
+          
+          <div id="star_<%= @post.id %>_<%= comment.id %>"></div>
+          <script>
+            $(document).on('turbolinks:load', function() {
+              let elem = document.querySelector('#star_<%= @post.id %>_<%= comment.id %>');
+              if (elem == null) return;
+              
+              elem.innerHTML = "";
+              let opt = {  
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                score: '<%= comment.star %>',
+                readOnly: true,
+              };
+              raty(elem, opt);
+            });
+          </script>
+          
+          <div class="ms-auto d-flex flex-column align-items-end">
+            <% if current_user == comment.user %>
+              <%= button_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-dark btn-sm mb-2" %>
+            <% end %>
+            <p class="card-text mb-0"><small class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d") %></small></p>
+            <% unless current_user.guest_user? %>
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2 reply-button" data-comment-id="<%= comment.id %>">返信</button>
+            <% end %>
           </div>
         </div>
-      <% end %>
-    <% else %>
-      <p>まだコメントはありません。</p>
-    <% end %>
-  </div>
+        
+        <!-- 返信フォーム -->
+        <div class="reply-form" id="reply-form-<%= comment.id %>" style="display: none;">
+          <% unless current_user.guest_user? %>
+            <%= form_with model: [@post, @post.comments.new], local: true do |form| %>
+              <%= form.hidden_field :parent_id, value: comment.id %>
+              <div class="mb-2">
+                <%= form.label :comment, "返信:", class: "form-label" %>
+                <%= form.text_area :comment, rows: 2, class: "form-control" %>
+              </div>
+              <div class="text-end">
+                <%= form.submit "返信を投稿", class: "btn btn-outline-secondary btn-sm" %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <!-- 返信一覧 -->
+        <%= render partial: 'replies', locals: { comment: comment } %>
+        
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p>まだコメントはありません。</p>
+<% end %>
 </div>
 
-
-
+</div>
 
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll('.reply-button').forEach(button => {
+    button.addEventListener('click', function() {
+      const commentId = this.getAttribute('data-comment-id');
+      const replyForm = document.getElementById(`reply-form-${commentId}`);
+      replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+    });
+  });
+});
+</script>

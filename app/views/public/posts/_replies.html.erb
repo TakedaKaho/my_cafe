@@ -1,0 +1,50 @@
+<% comment.replies.each do |reply| %>
+  <div class="card mb-2 ml-3" style="background-color: #F8F8FF;">
+    <div class="card-body">
+      <div class="d-flex">
+        <% if reply.user.present? && reply.user.profile_image.attached? %>
+          <div class="me-3">
+            <%= image_tag url_for(reply.user.profile_image), class: "avatar-img rounded-circle mr-4", style: "width: 40px; height: 40px; object-fit: cover;" %>
+            <p class="text-center mr-4"><small class="text-muted"><%= reply.user.name if reply.user %></small></p>
+          </div>
+        <% else %>
+          <div class="me-3">
+            <%= image_tag "no_image.jpg", class: "avatar-img rounded-circle mr-4", style: "width: 40px; height: 40px; object-fit: cover;" %>
+            <p class="text-center mr-4"><small class="text-muted"><%= reply.user.name if reply.user %></small></p>
+          </div>
+        <% end %>
+        <div class="flex-grow-1">
+          <p class="card-text"><small class="text-muted"><%= reply.comment.gsub(/\n/, '<br>').html_safe %></small></p>
+        </div>
+        <div class="ms-auto d-flex flex-column align-items-end">
+          <% if current_user == reply.user %>
+            <%= button_to "削除", post_comment_path(@post, reply), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-dark btn-sm mb-2" %>
+          <% end %>
+          <p class="card-text mb-0"><small class="text-muted"><%= reply.created_at.strftime("%Y-%m-%d") %></small></p>
+          <% unless current_user.guest_user? %>
+            <button type="button" class="btn btn-sm btn-outline-secondary mt-2 reply-button" data-comment-id="<%= reply.id %>">返信</button>
+          <% end %>
+        </div>
+      </div>
+      
+      <!-- 返信フォーム -->
+      <div class="reply-form" id="reply-form-<%= reply.id %>" style="display: none;">
+        <% unless current_user.guest_user? %>
+          <%= form_with model: [@post, @post.comments.new], local: true do |form| %>
+            <%= form.hidden_field :parent_id, value: reply.id %>
+            <div class="mb-2">
+              <%= form.label :comment, "返信:", class: "form-label" %>
+              <%= form.text_area :comment, rows: 2, class: "form-control" %>
+            </div>
+            <div class="text-end">
+              <%= form.submit "返信を投稿", class: "btn btn-outline-secondary btn-sm" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      
+      <%= render partial: 'replies', locals: { comment: reply } %> <%# 再帰的に呼び出し %>
+    </div>
+  </div>
+<% end %>
+

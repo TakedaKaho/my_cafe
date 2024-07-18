@@ -1,5 +1,36 @@
+  <% if current_user && current_user.email == User::GUEST_USER_EMAIL %>
+  <div class="border-bottom row mt-3 ">
 
-  <% if admin_signed_in? %>
+    <div class="mt-1 mr-4 mb-1 ml-4 col-3 d-flex align-items-center">
+      <%= link_to root_path do %>
+        <%= image_tag '3.png', size: '190x120' %>
+      <% end %>
+    </div>
+    
+    <div class="col-8 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-end align-items-center">
+        
+      <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+        My Page <i class="fa-solid fa-user"></i>
+      <% end %>
+
+      <%= link_to posts_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+        Cafe一覧 <i class="fa-solid fa-mug-hot"></i>
+      <% end %>
+
+      <%= link_to pick_ups_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+        今週のPickUp cafe <i class="fa-solid fa-heart" style="color: #e85967;"></i></i>
+      <% end %>
+
+      <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+         Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row mt-3"></div>
+  
+  
+  <% elsif admin_signed_in? %>
   <div class="border-bottom row">
   
     <div class="col-2">
@@ -19,6 +50,7 @@
     </div>
     
   </div>
+ 
     
 <% elsif user_signed_in? %>
   <div class="border-bottom row mt-3 ">
@@ -50,6 +82,8 @@
   </div>
   <div class="row mt-3"></div>
 
+
+ 
  
   
   <% else %>
