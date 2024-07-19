@@ -138,7 +138,8 @@
     
 <% if @comments.any? %>
   <h4>コメント一覧</h4>
-  コメント数: <%= @comments.count %>件 
+  [ コメント数: <%= @comments.count %>件 ]
+  [ 平均評価: <i class="fa-solid fa-star" style="color: #FFD43B;"></i><%= '%.1f' % @post.average_star %> ]
   <% @comments.where(parent_id: nil).each do |comment| %>
     <div class="card mb-1">
       <div class="card-body">
