@@ -4,9 +4,9 @@
   <div class="col-5 mb-2 mt-2">
     <span style="font-size: 2em;"><i class="fa-solid fa-caret-right"></i> <%= @post.name %></span>
   </div>
-  <div class ="col-3"></div>
+  <div class ="col-2"></div>
   
-  <div class="col-1 mt-4">
+  <div class="col-2 mt-4 text-right">
     <!--いいね機能-->
     <% if current_user && !current_user.guest_user? %>
     <div id="like_buttons_<%= @post.id %>">

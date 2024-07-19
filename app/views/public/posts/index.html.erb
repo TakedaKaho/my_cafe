@@ -36,11 +36,20 @@
     <% @posts.each do |post| %>
       <div class="col-md-3 mb-4">
         <%= link_to post_path(post.id), class: "text-decoration-none text-dark" do %>
-          <div class="card h-100">
+          <div class="card">
             <div class="card-body text-center">
               <%= image_tag url_for(post.post_images.first), class: "img-thumbnail", style: "width: 160px; height: 140px; object-fit: cover;" %>
-              <h6 class="card-title mt-2">~Name~</h6><h5> <%= post.name %></h5>
-              <h6 class="card-title"><i class="fa-solid fa-star" style="color: #FFD43B;"></i>平均評価: <%= '%.1f' % post.average_star %>点</h6>
+              <h6 class="card-title mt-1">~Name~</h6><h5> <%= post.name %></h5>
+              
+              <div class="d-flex justify-content-between">
+                <div class="ml-3">平均評価: <i class="fa-solid fa-star" style="color: #FFD43B;"></i><%= '%.1f' % post.average_star %></div>
+              <% if current_user && !current_user.guest_user? %>
+                <div id="like_buttons_<%= post.id %>"class="mr-2">
+                  <%= render 'public/likes/like', post: post %>
+                </div>
+              <% end %>
+              </div>
+              
             </div>
           </div>
         <% end %>
