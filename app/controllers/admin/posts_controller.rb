@@ -35,7 +35,7 @@ class Admin::PostsController < ApplicationController
       flash[:post_edit_notice]="正常に変更内容が反映されました"
       redirect_to admin_post_path(@post)
      else
-      render edit
+      render :edit
      end 
     end 
     

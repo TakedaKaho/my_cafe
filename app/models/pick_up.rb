@@ -10,7 +10,7 @@ class PickUp < ApplicationRecord
   #3枚のみ
   def exactly_three_images_attached
     if pick_up_images.length != 3
-      errors.add(:pick_up_images, "must have exactly three attached images")
+      errors.add(:pick_up_images, "は3枚添付する必要があります。")
     end
   end
   

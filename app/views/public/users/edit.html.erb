@@ -3,7 +3,7 @@
   
     <% if @user.errors.any? %>
     <div class="alert alert-danger">
-      <h4>次のエラーがあります:</h4>
+      <h6><%= pluralize(@user.errors.count, "件のエラー") %> により変更を保存できませんでした。</h6>
       <ul>
         <% @user.errors.full_messages.each do |message| %>
           <li><%= message %></li>

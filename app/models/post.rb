@@ -32,12 +32,12 @@ class Post < ApplicationRecord
   
   
   def at_least_one_image
-    errors.add(:post_images, "must have at least one attached image") unless post_images.attached?
+    errors.add(:post_images, "は少なくとも1つの画像を添付する必要があります。") unless post_images.attached?
   end
   
   def maximum_three_images
     if post_images.count > 3
-      errors.add(:post_images, "can't have more than 3 attached images")
+      errors.add(:post_images, "は3枚以上添付できません。")
     end
   end
   

@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+      post: "投稿"
+      pick_up: "pick_up記事"
+    attributes:
+      user:
+        name: "名前"
+        email: "Eメール"
+        body: "自己紹介文"
+      post:
+        post_images: "画像"
+      pick_up:
+        pick_up_images: "画像"
+        post: "関連するカフェ"
+  errors:
+      messages:
+        blank: "を入力してください"
+        too_short: "は%{count}文字以上で入力してください"
