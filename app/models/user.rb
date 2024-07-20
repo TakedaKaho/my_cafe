@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   
   validates :name, presence: true
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
          
   has_one_attached :profile_image
   
