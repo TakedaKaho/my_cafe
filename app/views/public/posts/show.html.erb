@@ -181,7 +181,7 @@
               <%= button_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-dark btn-sm mb-2" %>
             <% end %>
             <p class="card-text mb-0"><small class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d") %></small></p>
-            <% unless current_user.guest_user? %>
+            <% unless current_user&.guest_user? || current_user&.admin? %>
               <button type="button" class="btn btn-sm btn-outline-secondary mt-2 reply-button" data-comment-id="<%= comment.id %>">返信</button>
             <% end %>
           </div>
@@ -189,7 +189,7 @@
         
         <!-- 返信フォーム -->
         <div class="reply-form" id="reply-form-<%= comment.id %>" style="display: none;">
-          <% unless current_user.guest_user? %>
+          <% unless current_user&.guest_user? || current_user&.admin? %>
             <%= form_with model: [@post, @post.comments.new], local: true do |form| %>
               <%= form.hidden_field :parent_id, value: comment.id %>
               <div class="mb-2">
