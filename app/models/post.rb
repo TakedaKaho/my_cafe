@@ -28,7 +28,6 @@ class Post < ApplicationRecord
     .group(:id)
     .order(Arel.sql('COALESCE(AVG(comments.star), 0) DESC'))
 }
-
   
   
   def at_least_one_image
