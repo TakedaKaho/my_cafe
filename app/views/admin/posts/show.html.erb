@@ -81,6 +81,10 @@
        </div>
        
        <div class="btn-group mt-4 d-flex justify-center">
+       <%= link_to admin_posts_path, class: "btn btn-sm btn-outline-dark" do %>
+          cafe一覧に戻る <i class="fa-solid fa-rotate-left"></i>
+       <% end %>
+       
        <%= link_to edit_admin_post_path, class: "btn btn-sm btn-outline-dark" do %>
           編集 <i class="fa-regular fa-pen-to-square"></i>
        <% end %>
