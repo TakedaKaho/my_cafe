@@ -59,5 +59,12 @@ Rails.application.routes.draw do
       
       resources :comments, only: [:index, :create, :destroy]
     end
+    
+    resources :notifications, only: [:index] do
+      member do
+        patch :mark_as_read
+      end
+    end
+    
   end
 end
