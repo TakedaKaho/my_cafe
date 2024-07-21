@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-  
+  has_many :notifications, dependent: :destroy
   has_many :pick_ups
   
   has_many_attached :post_images

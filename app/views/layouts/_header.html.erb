@@ -61,29 +61,45 @@
       <% end %>
     </div>
     
-    <div class ="col-2"></div>
-    <div class="col-2 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-center align-items-center">
-      <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm" do %>
+    
+    <div class="col-8 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-end align-items-center">
+      
+      <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
         My Page <i class="fa-solid fa-user"></i>
       <% end %>
-    </div>
+      
+       <!-- 通知ボタン -->
+        <div class="dropdown">
+          <button class="btn btn-outline-dark rounded-pill btn-sm dropdown-toggle mr-3" type="button" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-bell fa-lg" style="color: #403f3f;"></i>
+            <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
+          </button>
+         <div class="dropdown-menu" aria-labelledby="notificationsDropdown">
+           <% current_user.notifications.where(read: false).each do |notification| %>
+             <%= link_to mark_as_read_notification_path(notification), method: :patch, class: "dropdown-item" do %>
+               <%= notification.comment.user.name %>さんがあなたのコメントに返信しました。
+             <% end %>
+           <% end %>
+           <% if current_user.notifications.where(read: false).empty? %>
+            <a class="dropdown-item" href="#">現在未読の通知はありません</a>
+           <% end %>
+         </div>
+        </div>
 
-    <div class="col-2 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-center align-items-center">
-      <%= link_to posts_path, class: "btn btn-outline-dark rounded-pill btn-sm" do %>
+   
+      <%= link_to posts_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
         Cafe一覧 <i class="fa-solid fa-mug-hot"></i>
       <% end %>
-    </div>
-
-    <div class="col-2 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-center align-items-center">
-      <%= link_to pick_ups_path, class: "btn btn-outline-dark rounded-pill btn-sm" do %>
-        今週のPickUp cafe <i class="fa-solid fa-heart" style="color: #e85967;"></i></i>
+    
+      <%= link_to pick_ups_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+        今週のPickUp cafe</i>
       <% end %>
+      
     </div>
   </div>
+  
   <div class="row mt-3"></div>
 
-
- 
  
   
   <% else %>
