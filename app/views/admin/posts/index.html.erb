@@ -1,5 +1,6 @@
 <div class="container">
-  <div class="row justify-content-center">
+  <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">C a f e 一 覧</h2>
+  <div class="row justify-content-center mt-4">
     <div class="col-10">
       <% if flash[:post_destroy_notice].present? %>
        <div class="alert alert-danger">
@@ -16,7 +17,7 @@
           </div>
 
           <table class="table">
-            <thead>
+            <thead class="text-center">
               <tr>
                 <th>ID</th>
                 <th>画像</th>
@@ -26,7 +27,7 @@
                 <th></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
               <% @posts.each do |post| %>
                 <tr>
                   <td><%= post.id %></td>

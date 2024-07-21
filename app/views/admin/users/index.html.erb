@@ -1,12 +1,10 @@
 <div class="container">
+<h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">U s e r 一 覧</h2>
 
-
- <div class="row justify-content-center">
+ <div class="row justify-content-center mt-4">
   
-  <h2 class="mb-4 mt-4">User一覧</h2>
-  
-  <table class="table">
-        <thead>
+  <table class="table mt-4">
+        <thead class="text-center">
           <tr>
             <th>会員ID</th>
             <th>profile画像</th>
@@ -17,7 +15,7 @@
           </tr>
         </thead>
         
-        <tbody>
+        <tbody class="text-center">
          <% @users.each do |user| %>
           <tr>
             <td><%= user.id %></td>

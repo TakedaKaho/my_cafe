@@ -1,11 +1,12 @@
 <div class="container">
+ <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">P i c k U p 一 覧</h2>
  <div class="row justify-content-center">
      
   <div class="ml-4">
    <%= flash[:pick_destroy_notice] %>
   </div>
   
-  <div class="card">
+  <div class="card mt-4" style="width: 800px;">
     <div class="card-body">
       <div class="d-flex justify-content-end mb-3 mr-4">
         <%= link_to new_admin_pick_up_path do %>
@@ -14,7 +15,7 @@
       </div>
       
       <table class="table">
-        <thead>
+        <thead class="text-center">
           <tr>
             <th>投稿日</th>
             <th>記事名</th>
@@ -22,14 +23,14 @@
           </tr>
         </thead>
         
-        <tbody>
+        <tbody class="text-center">
          <% @pick_ups.each do |pick_up| %>
           <tr>
             <th><%= pick_up.created_at.strftime("%Y-%m-%d") %></th>
             <th><%= pick_up.title %></th>
             <th>
              <%= link_to admin_pick_up_path(pick_up.id), class: "btn btn-sm btn-outline-secondary" do %>
-             詳細へ
+             詳細を見る
              <% end %>
             </th>
           </tr>

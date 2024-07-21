@@ -1,7 +1,7 @@
   <% if current_user && current_user.email == User::GUEST_USER_EMAIL %>
-  <div class="border-bottom row mt-3 ">
+  <div class="border-bottom row mt-2 ">
 
-    <div class="mt-1 mr-4 mb-1 ml-4 col-3 d-flex align-items-center">
+    <div class="mr-4 mb-1 ml-2 col-3 d-flex align-items-center">
       <%= link_to root_path do %>
         <%= image_tag '3.png', size: '190x120' %>
       <% end %>
@@ -53,9 +53,9 @@
  
     
 <% elsif user_signed_in? %>
-  <div class="border-bottom row mt-3 ">
+  <div class="border-bottom row mt-2">
 
-    <div class="mt-1 mr-4 mb-1 ml-4 col-3 d-flex align-items-center">
+    <div class="mr-4 mb-1 ml-2 col-3 d-flex align-items-center">
       <%= link_to root_path do %>
         <%= image_tag '3.png', size: '190x120' %>
       <% end %>
@@ -104,8 +104,8 @@
   
   <% else %>
   
-    <div class="row border-bottom mt-3">
-    <div class="col-3">
+    <div class="row border-bottom mt-1">
+    <div class="col-3 ml-2">
       <%= link_to root_path do %>
         <%= image_tag '3.png', size: '190x120' %>
       <% end %>
