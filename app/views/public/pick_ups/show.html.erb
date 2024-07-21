@@ -1,12 +1,12 @@
 <div class="container">
 <div class="row">
     <div class="col-md-12">
-      <h2 class="mt-4 mb-4"><i class="fa-solid fa-bullhorn"></i> PickUp記事詳細</h2>
-      <div class="card" style="background-color: #D2B48C;">
+      <h3 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;"><i class="fa-solid fa-check"></i> P i c k U p 記 事 詳 細</h3>
+      <div class="card" style="background-color: #FAF0E6;">
         <div class="card-body">
           
           <div class="row justify-content-center">
-            <h2 class="card-title text-white", style="font-family: 'Helvetica', sans-serif;">『 <%= @pick_up.title %> 』</h2>
+            <h3 class="card-title", style="font-family: 'Helvetica', sans-serif;">『 <%= @pick_up.title %> 』</h3>
             
             <% if @pick_up.pick_up_images.attached? %>
                 <div class="mt-4">
@@ -35,7 +35,7 @@
         </div>
         <div class="row justify-content-center">
          <%= link_to pick_ups_path, class: "btn btn-outline-dark mt-3 mb-4" do %>
-           pickup一覧に戻る <i class="fa-solid fa-rotate-left"></i>
+           pick up一覧に戻る <i class="fa-solid fa-rotate-left"></i>
          <% end %>
         </div>
     </div>
