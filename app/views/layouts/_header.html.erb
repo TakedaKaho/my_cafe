@@ -78,6 +78,7 @@
            <% current_user.notifications.where(read: false).each do |notification| %>
              <%= link_to mark_as_read_notification_path(notification), method: :patch, class: "dropdown-item" do %>
                <%= notification.comment.user.name %>さんがあなたのコメントに返信しました。
+               <%= " (#{time_ago_in_words(notification.created_at)}前)" %>
              <% end %>
            <% end %>
            <% if current_user.notifications.where(read: false).empty? %>
