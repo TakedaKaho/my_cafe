@@ -30,7 +30,7 @@
       <!-- 返信フォーム -->
       <div class="reply-form" id="reply-form-<%= reply.id %>" style="display: none;">
         <% unless current_user&.guest_user? || current_user&.admin? %>
-          <%= form_with model: [@post, @post.comments.new], local: true do |form| %>
+          <%= form_with model: [@post, Comment.new], local: true do |form| %>
             <%= form.hidden_field :parent_id, value: reply.id %>
             <div class="mb-2">
               <%= form.label :comment, "返信:", class: "form-label" %>
@@ -42,9 +42,10 @@
           <% end %>
         <% end %>
       </div>
-      <%# 再帰的に呼び出し %>
-      <%= render partial: 'replies', locals: { comment: reply } %> 
+      <!-- 返信の返信 -->
+      <%= render partial: 'replies', locals: { comment: reply } %>
     </div>
   </div>
 <% end %>
+
 
