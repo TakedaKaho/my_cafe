@@ -67,7 +67,7 @@
     <% end %>
     
     
-    <h5>コメント、レビューを残す</h5>
+    <h5 class="mt-4">コメント、レビューを残す</h5>
     <% if current_user && !current_user.guest_user? %>
     <%= form_with(model: [@post, Comment.new], local: true) do |form| %>
       <div class="form-group">
@@ -137,11 +137,11 @@
     
     
 <% if @comments.any? %>
-  <h4>コメント一覧</h4>
+  <h4 class="mt-4">コメント一覧</h4>
   [ コメント数: <%= @comments.count %>件 ]
   [ 平均評価: <i class="fa-solid fa-star" style="color: #FFD43B;"></i><%= '%.1f' % @post.average_star %> ]
   <% @comments.where(parent_id: nil).each do |comment| %>
-    <div class="card mb-1">
+    <div class="card mb-1 mt-2">
       <div class="card-body">
         <div class="d-flex">
           <% if comment.user.present? && comment.user.profile_image.attached? %>
