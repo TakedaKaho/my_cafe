@@ -1,5 +1,4 @@
 <div class="container">
-  
   <% if @pick_up.errors.any? %>
     <div class="alert alert-danger">
       <h6><%= pluralize(@pick_up.errors.count, "件のエラー") %> により変更を保存できませんでした。</h6>
@@ -10,17 +9,16 @@
       </ul>
     </div>
   <% end %>
-  
-  
-  <%= form_with model: @pick_up, url: admin_pick_up_path(@pick_up), method: :patch, local: true, multipart: true do |form| %>
+
+  <%= form_with model: @pick_up, url: admin_pick_up_path(@pick_up), method: :patch, local: true, multipart: true, class: "pick-up-form" do |form| %>
     <div class="mb-3">
       <%= form.label :pick_up_images, "画像:3枚", class: "form-label" %>
-      <%= form.file_field :pick_up_images, multiple: true, accept: "image/*", id: "pick_up_image_input", class: "form-control" %>
-      <button type="button" id="add-file-field" class="ml-2 mt-2 btn btn-sm btn-outline-secondary">画像を追加</button>
+      <%= form.file_field :pick_up_images, multiple: true, accept: "image/*", class: "form-control pick-up-image-input" %>
+      <button type="button" class="ml-2 mt-2 btn btn-sm btn-outline-secondary add-file-field">画像を追加</button>
     </div>
-    
+
     <h6>< preview ></h6>
-    <div id="image_preview"></div>
+    <div class="image-preview"></div>
 
     <h6>< 現在の画像 ></h6>
     <% @pick_up.pick_up_images.each do |image| %>
@@ -48,47 +46,50 @@
   <% end %>
 </div>
 
-
 <!--画像追加ボタン・プレビュー-->
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const addButton = document.getElementById("add-file-field");
-  const imagePreviewContainer = document.getElementById("image_preview");
+document.addEventListener("turbolinks:load", function() {
+  document.querySelectorAll(".pick-up-form").forEach(form => {
+    const addButton = form.querySelector(".add-file-field");
+    const imagePreviewContainer = form.querySelector(".image-preview");
 
-  addButton.addEventListener("click", function() {
-    const fileFields = document.querySelectorAll("input[type='file']");
-    if (fileFields.length < 3) { // 3つ未満の場合のみ追加
-      const newFileField = fileFields[0].cloneNode(); // 最初のフィールドをクローン
-      fileFields[0].parentNode.insertBefore(newFileField, fileFields[0].nextSibling);
+    addButton.addEventListener("click", function() {
+      const fileFields = form.querySelectorAll(".pick-up-image-input");
+      if (fileFields.length < 3) { // 3つ未満の場合のみ追加
+        const newFileField = fileFields[0].cloneNode(); // 最初のフィールドをクローン
+        fileFields[0].parentNode.insertBefore(newFileField, fileFields[0].nextSibling);
 
-      newFileField.addEventListener('change', handleFileSelect);
+        newFileField.addEventListener('change', handleFileSelect);
+      }
+    });
+
+    form.querySelectorAll(".pick-up-image-input").forEach(fileField => {
+      if (!fileField.hasAttribute('data-listener-added')) {
+        fileField.setAttribute('data-listener-added', 'true');
+        fileField.addEventListener('change', handleFileSelect);
+      }
+    });
+
+    function handleFileSelect(event) {
+      const files = event.target.files;
+
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+          const imgElement = document.createElement('img');
+          imgElement.src = event.target.result;
+          imgElement.width = 100;
+          imgElement.height = 100;
+          imgElement.classList.add('img-thumbnail', 'mt-2');
+          imgElement.style.objectFit = 'cover';
+
+          imagePreviewContainer.appendChild(imgElement);
+        };
+
+        reader.readAsDataURL(file);
+      });
     }
   });
-
-  document.querySelectorAll("input[type='file']").forEach(fileField => {
-    fileField.addEventListener('change', handleFileSelect);
-  });
-
-  function handleFileSelect(event) {
-    const files = event.target.files;
-
-    Array.from(files).forEach(file => {
-      const reader = new FileReader();
-
-      reader.onload = function(event) {
-        const imgElement = document.createElement('img');
-        imgElement.src = event.target.result;
-        imgElement.width = 100;
-        imgElement.height = 100;
-        imgElement.classList.add('img-thumbnail', 'mt-2');
-        imgElement.style.objectFit = 'cover';
-
-        imagePreviewContainer.appendChild(imgElement);
-      };
-
-      reader.readAsDataURL(file);
-    });
-  }
 });
-
 </script>

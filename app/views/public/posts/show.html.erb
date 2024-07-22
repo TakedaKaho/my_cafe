@@ -219,7 +219,7 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("turbolinks:load", function() {
   document.querySelectorAll('.reply-button').forEach(button => {
     button.addEventListener('click', function() {
       const commentId = this.getAttribute('data-comment-id');
