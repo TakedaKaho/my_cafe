@@ -11,12 +11,14 @@ class Public::LikesController < ApplicationController
     
     def index
      @user = User.find(params[:id])
+     #@liked_posts = @post.likes.map(&:post) 効率のため下記に変更
      @liked_posts = Post.joins(:likes).where(likes: { user_id: @user.id }).page(params[:page]).per(18)
     end
     
     def show
      @post = Post.find(params[:post_id])
-     @liked_users = @post.likes.map(&:user)
+     #@liked_users = @post.likes.map(&:user)　効率のため下記に変更
+     @liked_users = User.joins(:likes).where(likes: { post_id: @post.id })
     end
     
     def destroy

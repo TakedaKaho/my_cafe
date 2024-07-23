@@ -1,8 +1,8 @@
 class PickUp < ApplicationRecord
     
- belongs_to :post
+  belongs_to :post
     
- has_many_attached :pick_up_images
+  has_many_attached :pick_up_images
  
   validates :title, presence: true
   validates :body, presence: true

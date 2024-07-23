@@ -24,10 +24,10 @@ class Post < ApplicationRecord
   scope :old, -> {order(created_at: :asc)}
   # 平均評価順で並び替えるスコープ
   scope :highest_rated, -> {
-  left_joins(:comments)
-    .group(:id)
-    .order(Arel.sql('COALESCE(AVG(comments.star), 0) DESC'))
-}
+    left_joins(:comments)
+     .group(:id)
+     .order(Arel.sql('COALESCE(AVG(comments.star), 0) DESC'))
+  }
   
   
   def at_least_one_image
