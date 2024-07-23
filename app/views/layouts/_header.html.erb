@@ -1,13 +1,13 @@
   <% if current_user && current_user.email == User::GUEST_USER_EMAIL %>
   <div class="border-bottom row mt-2 ">
 
-    <div class="mr-4 mb-1 ml-2 col-3 d-flex align-items-center">
+    <div class="mr-4 mb-1 ml-2 col-md-3 col-6 d-flex align-items-center">
       <%= link_to root_path do %>
         <%= image_tag '3.png', size: '190x120' %>
       <% end %>
     </div>
     
-    <div class="col-8 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-end align-items-center">
+    <div class="col-md-8 col-12 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-end align-items-center">
         
       <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
         My Page <i class="fa-solid fa-user"></i>
@@ -33,17 +33,17 @@
   <% elsif admin_signed_in? %>
   <div class="border-bottom row">
   
-    <div class="col-2">
+    <div class="col-md-2 col-6">
       <%= link_to admin_path do %>
         <%= image_tag '4.png', size: '200x133' %>
       <% end %>
     </div>
 
-    <div class="col-2">
+    <div class="col-md-2 col-6">
       <%= image_tag 'admin2.png', size: '190x120' %>
     </div>
     <div class="col-5"></div>
-    <div class="col-3 d-flex justify-content-center align-items-center">
+    <div class="col-md-3 col-6 d-flex justify-content-center align-items-center">
       <%= link_to destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark mt-auto mr-2 mb-auto ml-4", style: "font-size: 15px; padding: 10px 20px;" do %>
       <i class="fa-solid fa-right-from-bracket"></i>Log Out
       <% end %>
@@ -55,14 +55,14 @@
 <% elsif user_signed_in? %>
   <div class="border-bottom row mt-2">
 
-    <div class="mr-4 mb-1 ml-2 col-3 d-flex align-items-center">
+    <div class="mr-4 mb-1 ml-2 col-md-3 col-6 d-flex align-items-center">
       <%= link_to root_path do %>
         <%= image_tag '3.png', size: '190x120' %>
       <% end %>
     </div>
     
     
-    <div class="col-8 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-end align-items-center">
+    <div class="col-md-8 col-12 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-end align-items-center">
       
       <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
         My Page <i class="fa-solid fa-user"></i>
@@ -108,13 +108,13 @@
   <% else %>
   
     <div class="row border-bottom mt-1">
-    <div class="col-3 ml-2">
+    <div class="col-md-3 col-12 ml-md-2">
       <%= link_to root_path do %>
         <%= image_tag '3.png', size: '190x120' %>
       <% end %>
     </div>
     <div class ="col-1"></div>
-    <div class="col-7 d-flex justify-content-end align-items-center">
+    <div class="col-md-7 col-12 d-flex justify-content-end align-items-center">
       <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto" %>
       <%= link_to "Log In", new_user_session_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto"%>
       <%= link_to "新規登録", new_user_registration_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto" %>
