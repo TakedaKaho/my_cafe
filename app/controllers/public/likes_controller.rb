@@ -9,13 +9,13 @@ class Public::LikesController < ApplicationController
      #redirect_to post_path(@post) 非同期化のため
     end 
     
-    def index
+    def index #自分がいいねした投稿
      @user = User.find(params[:id])
      #@liked_posts = @post.likes.map(&:post) 効率のため下記に変更
      @liked_posts = Post.joins(:likes).where(likes: { user_id: @user.id }).page(params[:page]).per(18)
     end
     
-    def show
+    def show #このカフェをいいねした人一覧
      @post = Post.find(params[:post_id])
      #@liked_users = @post.likes.map(&:user)　効率のため下記に変更
      @liked_users = User.joins(:likes).where(likes: { post_id: @post.id })

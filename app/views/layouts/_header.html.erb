@@ -70,21 +70,23 @@
       
        <!-- 通知ボタン -->
         <div class="dropdown">
-          <button class="btn btn-outline-dark rounded-pill btn-sm dropdown-toggle mr-3" type="button" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa-solid fa-bell fa-lg" style="color: #403f3f;"></i>
-            <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
-          </button>
-         <div class="dropdown-menu" aria-labelledby="notificationsDropdown">
-           <% current_user.notifications.where(read: false).each do |notification| %>
-             <%= link_to mark_as_read_notification_path(notification), method: :patch, class: "dropdown-item" do %>
-               <%= notification.comment.user.name %>さんがあなたのコメントに返信しました。
-               <%= " (#{time_ago_in_words(notification.created_at)}前)" %>
-             <% end %>
-           <% end %>
-           <% if current_user.notifications.where(read: false).empty? %>
-            <a class="dropdown-item" href="#">現在未読の通知はありません</a>
-           <% end %>
-         </div>
+<button class="btn btn-outline-dark rounded-pill btn-sm dropdown-toggle mr-3" type="button" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa-solid fa-bell fa-lg" style="color: #403f3f;"></i>
+  <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
+</button>
+<div class="dropdown-menu" aria-labelledby="notificationsDropdown">
+  <% if current_user.notifications.where(read: false).any? %>
+    <% current_user.notifications.where(read: false).each do |notification| %>
+      <%= link_to mark_as_read_notification_path(notification), method: :patch, class: "dropdown-item" do %>
+        <%= notification.comment.user.name %>さんがあなたのコメントに返信しました。
+        <%= " (#{time_ago_in_words(notification.created_at)}前)" %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <a class="dropdown-item" href="#">現在未読の通知はありません</a>
+  <% end %>
+</div>
+
         </div>
 
    
