@@ -1,8 +1,9 @@
-<h1>カフェの投稿</h1>
+
 
 <%= form_with model: @post, url: admin_posts_path, method: :post, local: true, multipart: true, class: "post-form" do |form| %>
   <div class="container">
-    <div class="row">
+    <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">C a f e 投 稿</h2>
+    <div class="row mt-4">
       <div class="col-md-6">
         
         <% if @post.errors.any? %>

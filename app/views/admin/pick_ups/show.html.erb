@@ -1,4 +1,5 @@
   <div class="container">
+    
   <% if flash[:create_notice].present? %>
     <div class="alert alert-success">
       <%= flash[:create_notice] %>
@@ -17,7 +18,6 @@
           
           <div class="row justify-content-center">
             <h2 class="card-title text-white", style="font-family: 'Helvetica', sans-serif;">『 <%= @pick_up.title %> 』</h2>
-            
             <% if @pick_up.pick_up_images.attached? %>
                 <div class="mt-4">
                   <% @pick_up.pick_up_images.each do |image| %>
@@ -25,25 +25,26 @@
                   <% end %>
                 </div>
             <% end %>
-            </div>
-            <div class="row justify-content-center">
+          </div>
+          
+          <div class="row justify-content-center">
             <div class="col-md-8">
               <h3 class="card-text mb-2" style="font-family: 'Times New Roman', sans-serif; padding: 5px; width:400px;">
                今週のPickUp Cafe『 <%= @pick_up.post.name %> 』</h3>
               <h5 class="card-text bg-white text-center mt-2" style="padding: 15px;">
                 <%= @pick_up.body.gsub(/\n/, '<br>').html_safe %></h5>
-
-              
-              <p class="mt-3 d-flex justify-content-end">
+              <div class="mt-3 d-flex justify-content-end">
                 <%= link_to admin_post_path(@pick_up.post), class: "btn btn-dark" do %>
                   <%= @pick_up.post.name %>の詳細を見る <i class="fa-solid fa-mug-hot" style="color: #ffffff;"></i>
                 <% end %>
-              </p>
-            </div>
+              </div>
             </div>
           </div>
+          
         </div>
-                <div class="d-flex justify-content-center mt-3">
+      </div>
+      
+      <div class="d-flex justify-content-center mt-3">
           <%= link_to  admin_pick_ups_path, class: "btn  btn-outline-dark mr-1" do %>
             <i class="fa-solid fa-rotate-left"></i> 記事一覧へ
           <% end %>
@@ -54,6 +55,8 @@
             消去 <i class="fa-solid fa-trash-can"></i>
           <% end %>
       </div>
+      
     </div>
   </div>
+  
 </div>

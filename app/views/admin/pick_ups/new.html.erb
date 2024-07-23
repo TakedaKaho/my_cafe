@@ -1,6 +1,6 @@
 <div class="container">
-  <h3>記事の投稿</h3>
-  <div class="row">
+  <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">P i c k U p  投 稿</h2>
+  <div class="row justify-content-center mt-4">
     <div class="col-md-6">
 
       <% if @pick_up.errors.any? %>
@@ -41,7 +41,7 @@
         </div>
 
         <div class="mb-3 text-center">
-          <%= form.submit "投稿", class: "btn btn-primary" %>
+          <%= form.submit "投稿", class: "btn btn-outline-dark" %>
         </div>
 
       <% end %>

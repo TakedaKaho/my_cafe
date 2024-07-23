@@ -1,4 +1,9 @@
 <div class="container">
+ <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">P i c k U p  編 集</h2>
+ 
+ <div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    
   <% if @pick_up.errors.any? %>
     <div class="alert alert-danger">
       <h6><%= pluralize(@pick_up.errors.count, "件のエラー") %> により変更を保存できませんでした。</h6>
@@ -9,9 +14,9 @@
       </ul>
     </div>
   <% end %>
-
+  
   <%= form_with model: @pick_up, url: admin_pick_up_path(@pick_up), method: :patch, local: true, multipart: true, class: "pick-up-form" do |form| %>
-    <div class="mb-3">
+    <div class="mb-4">
       <%= form.label :pick_up_images, "画像:3枚", class: "form-label" %>
       <%= form.file_field :pick_up_images, multiple: true, accept: "image/*", class: "form-control pick-up-image-input" %>
       <button type="button" class="ml-2 mt-2 btn btn-sm btn-outline-secondary add-file-field">画像を追加</button>
@@ -44,6 +49,9 @@
       <%= form.submit "変更保存", class: "btn btn-primary" %>
     </div>
   <% end %>
+  
+  </div>
+ </div>
 </div>
 
 <!--画像追加ボタン・プレビュー-->
