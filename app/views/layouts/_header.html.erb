@@ -1,97 +1,127 @@
-<header>
   <% if current_user && current_user.email == User::GUEST_USER_EMAIL %>
-    <div class="border-bottom row mt-2">
-      <div class="col-12 col-md-3 d-flex align-items-center mb-2 mb-md-0">
-        <%= link_to root_path do %>
-          <%= image_tag '3.png', size: '190x120' %>
-        <% end %>
-      </div>
-      <div class="col-12 col-md-9 d-flex justify-content-end align-items-center">
-        <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-          My Page <i class="fa-solid fa-user"></i>
-        <% end %>
-        <%= link_to posts_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-          Cafe一覧 <i class="fa-solid fa-mug-hot"></i>
-        <% end %>
-        <%= link_to pick_ups_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-          今週のPickUp cafe <i class="fa-solid fa-heart" style="color: #e85967;"></i>
-        <% end %>
-        <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-          Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i>
-        <% end %>
-      </div>
-    </div>
+  <div class="border-bottom row mt-2 ">
 
+    <div class="mr-4 mb-1 ml-2 col-3 d-flex align-items-center">
+      <%= link_to root_path do %>
+        <%= image_tag '3.png', size: '190x120' %>
+      <% end %>
+    </div>
+    
+    <div class="col-8 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-end align-items-center">
+        
+      <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+        My Page <i class="fa-solid fa-user"></i>
+      <% end %>
+
+      <%= link_to posts_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+        Cafe一覧 <i class="fa-solid fa-mug-hot"></i>
+      <% end %>
+
+      <%= link_to pick_ups_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+        今週のPickUp cafe <i class="fa-solid fa-heart" style="color: #e85967;"></i></i>
+      <% end %>
+
+      <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+         Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row mt-3"></div>
+  
+  
   <% elsif admin_signed_in? %>
-    <div class="border-bottom row">
-      <div class="col-12 col-md-2 d-flex align-items-center">
-        <%= link_to admin_path do %>
-          <%= image_tag '4.png', size: '200x133' %>
-        <% end %>
-      </div>
-      <div class="col-12 col-md-2">
-        <%= image_tag 'admin2.png', size: '190x120' %>
-      </div>
-      <div class="col-12 col-md-8"></div>
-      <div class="col-12 col-md-2 d-flex justify-content-center align-items-center">
-        <%= link_to destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark mt-auto mr-2 mb-auto ml-4", style: "font-size: 15px; padding: 10px 20px;" do %>
-          <i class="fa-solid fa-right-from-bracket"></i>Log Out
-        <% end %>
-      </div>
+  <div class="border-bottom row">
+  
+    <div class="col-2">
+      <%= link_to admin_path do %>
+        <%= image_tag '4.png', size: '200x133' %>
+      <% end %>
     </div>
 
-  <% elsif user_signed_in? %>
-    <div class="border-bottom row mt-2">
-      <div class="col-12 col-md-3 d-flex align-items-center mb-2 mb-md-0">
-        <%= link_to root_path do %>
-          <%= image_tag '3.png', size: '190x120' %>
-        <% end %>
-      </div>
-      <div class="col-12 col-md-9 d-flex justify-content-end align-items-center">
-        <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-          My Page <i class="fa-solid fa-user"></i>
-        <% end %>
-        <div class="dropdown">
-          <button class="btn btn-outline-dark rounded-pill btn-sm dropdown-toggle mr-3" type="button" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa-solid fa-bell fa-lg" style="color: #403f3f;"></i>
-            <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="notificationsDropdown">
-            <% notifications = current_user.notifications.where(read: false) %>
-            <% if notifications.any? %>
-              <% notifications.each do |notification| %>
-                <%= link_to mark_as_read_notification_path(notification), method: :patch, class: "dropdown-item" do %>
-                  <%= notification.comment.user.name %>さんがあなたのコメントに返信しました。
-                  <%= " (#{time_ago_in_words(notification.created_at)}前)" %>
-                <% end %>
+    <div class="col-2">
+      <%= image_tag 'admin2.png', size: '190x120' %>
+    </div>
+    <div class="col-5"></div>
+    <div class="col-3 d-flex justify-content-center align-items-center">
+      <%= link_to destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark mt-auto mr-2 mb-auto ml-4", style: "font-size: 15px; padding: 10px 20px;" do %>
+      <i class="fa-solid fa-right-from-bracket"></i>Log Out
+      <% end %>
+    </div>
+    
+  </div>
+ 
+    
+<% elsif user_signed_in? %>
+  <div class="border-bottom row mt-2">
+
+    <div class="mr-4 mb-1 ml-2 col-3 d-flex align-items-center">
+      <%= link_to root_path do %>
+        <%= image_tag '3.png', size: '190x120' %>
+      <% end %>
+    </div>
+    
+    
+    <div class="col-8 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-end align-items-center">
+      
+      <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+        My Page <i class="fa-solid fa-user"></i>
+      <% end %>
+      
+      <!-- 通知ボタン -->
+      <div class="dropdown">
+        <button class="btn btn-outline-dark rounded-pill btn-sm dropdown-toggle mr-3" type="button" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-solid fa-bell fa-lg" style="color: #403f3f;"></i>
+          <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="notificationsDropdown">
+          <% notifications = current_user.notifications.where(read: false) %>
+          <% if notifications.any? %>
+            <% notifications.each do |notification| %>
+              <%= link_to mark_as_read_notification_path(notification), method: :patch, class: "dropdown-item" do %>
+                <%= notification.comment.user.name %>さんがあなたのコメントに返信しました。
+                <%= " (#{time_ago_in_words(notification.created_at)}前)" %>
               <% end %>
-            <% else %>
-              <a class="dropdown-item" href="#">現在未読の通知はありません</a>
             <% end %>
-          </div>
+          <% else %>
+            <a class="dropdown-item" href="#">現在未読の通知はありません</a>
+          <% end %>
         </div>
-        <%= link_to posts_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-          Cafe一覧 <i class="fa-solid fa-mug-hot"></i>
-        <% end %>
-        <%= link_to pick_ups_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-          <i class="fa-solid fa-bullhorn"></i> 今週のPickUp cafe
-        <% end %>
       </div>
+
+   
+      <%= link_to posts_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+        Cafe一覧 <i class="fa-solid fa-mug-hot"></i>
+      <% end %>
+    
+      <%= link_to pick_ups_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+        <i class="fa-solid fa-bullhorn"></i> 今週のPickUp cafe</i>
+      <% end %>
+      
+    </div>
+  </div>
+  
+  <div class="row mt-3"></div>
+
+ 
+  
+  <% else %>
+  
+    <div class="row border-bottom mt-1">
+    <div class="col-3 ml-2">
+      <%= link_to root_path do %>
+        <%= image_tag '3.png', size: '190x120' %>
+      <% end %>
+    </div>
+    <div class ="col-1"></div>
+    <div class="col-7 d-flex justify-content-end align-items-center">
+      <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto" %>
+      <%= link_to "Log In", new_user_session_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto"%>
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto" %>
+      <%= link_to "管理者ログイン", new_admin_session_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto" %>
     </div>
 
-  <% else %>
-    <div class="row border-bottom mt-1">
-      <div class="col-12 col-md-3 ml-2 mb-2 mb-md-0">
-        <%= link_to root_path do %>
-          <%= image_tag '3.png', size: '190x120' %>
-        <% end %>
-      </div>
-      <div class="col-12 col-md-9 d-flex justify-content-end align-items-center">
-        <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-dark rounded-pill mt-2 mr-2 mb-2" %>
-        <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-dark rounded-pill mt-2 mr-2 mb-2" %>
-        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-dark rounded-pill mt-2 mr-2 mb-2" %>
-        <%= link_to "管理者ログイン", new_admin_session_path, class: "btn btn-outline-dark rounded-pill mt-2 mr-2 mb-2" %>
-      </div>
     </div>
+    
+    
   <% end %>
-</header>
