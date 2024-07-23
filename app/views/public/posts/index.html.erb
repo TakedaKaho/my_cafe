@@ -1,57 +1,59 @@
 <div class="container">
   <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">C a f e 一 覧 </h2>
-
   <div class="row mt-4">
-    <div class="col-12 col-md-6 mb-4">
-      
-      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
-        <div class="dropdown mb-2 mb-md-0">
-          <button class="btn btn-sm btn-outline-dark dropdown-toggle" type="button" id="sortDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            並び替え
-          </button>
-          <div class="dropdown-menu" aria-labelledby="sortDropdown">
-            <%= link_to '新しい順', posts_path(latest: true), class: 'dropdown-item' %>
-            <%= link_to '古い順', posts_path(old: true), class: 'dropdown-item' %>
-            <%= link_to '評価の高い順', posts_path(star_count: true), class: 'dropdown-item' %>
-          </div>
+    <h1 class="col-6 mb-4"></h1>
+    
+    <div class="col-6 mb-4 text-right">
+      <div class="d-flex align-items-center justify-content-end">
+       <div class="dropdown">
+        <button class="btn btn-sm btn-outline-dark dropdown-toggle mr-2" type="button" id="sortDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          並び替え
+        </button>
+        <div class="dropdown-menu mr-1" aria-labelledby="sortDropdown">
+          <%= link_to '新しい順', posts_path(latest: true) , class: 'dropdown-item' %>
+          <%= link_to '古い順', posts_path(old: true), class: 'dropdown-item' %>
+          <%= link_to '評価の高い順', posts_path(star_count: true), class: 'dropdown-item' %>
         </div>
-        <%= form_with url: search_posts_path, local: true, method: :get, class: "d-flex" do |f| %>
-          <%= f.select :search, options_for_select([['CAFE', 'posts'], ['USER', 'users']]), {}, class: "form-control me-2" %>
-          <%= f.text_field :word, placeholder: "キーワード検索", class: "form-control me-2" %>
-          <%= f.submit "検索", class: "btn btn-dark btn-sm" %>
+       </div>
+        <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
+         <%= f.select :search, options_for_select([['CAFE', 'posts'], ['USER', 'users']]) %>
+         <%= f.text_field :word, placeholder: "キーワード検索" %>
+         <%= f.submit "検索", class: "btn-sm btn-dark" %>
         <% end %>
       </div>
     </div>
+    
   </div>
+
 
   <div class="row">
     <% @posts.each do |post| %>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div class="col-md-3 mb-4">
         <%= link_to post_path(post.id), class: "text-decoration-none text-dark" do %>
-          <div class="card">
-            <%= image_tag url_for(post.post_images.first), class: "card-img-top img-thumbnail", style: "object-fit: cover;", alt: "Post image" %>
+          <div class="card d-flex flex-column">
             <div class="card-body text-center">
-              <h6 class="card-title">~Name~</h6>
-              <h5><%= post.name %></h5>
+              <%= image_tag url_for(post.post_images.first), class: "img-thumbnail", style: "width: 160px; height: 140px; object-fit: cover;" %>
+              <h6 class="card-title mt-1">~Name~</h6><h5> <%= post.name %></h5>
               
-              <div class="d-flex justify-content-between align-items-center">
-                <div>平均評価: <i class="fa-solid fa-star" style="color: #FFD43B;"></i><%= '%.1f' % post.average_star %></div>
-                <% if current_user && !current_user.guest_user? %>
-                  <div id="like_buttons_<%= post.id %>">
-                    <%= render 'public/likes/like', post: post %>
-                  </div>
-                <% end %>
+              <div class="d-flex justify-content-between">
+                <div class="ml-3">平均評価: <i class="fa-solid fa-star" style="color: #FFD43B;"></i><%= '%.1f' % post.average_star %></div>
+              <% if current_user && !current_user.guest_user? %>
+                <div id="like_buttons_<%= post.id %>"class="mr-2">
+                  <%= render 'public/likes/like', post: post %>
+                </div>
+              <% end %>
               </div>
+              
             </div>
           </div>
         <% end %>
       </div>
     <% end %>
   </div>
-
-  <div class="pagination justify-content-center mt-3">
+  
+   <div class="pagination justify-content-center mt-3">
     <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
-  </div>
+   </div>
+   
 </div>
-
 
