@@ -1,6 +1,6 @@
 <div class="container">
-  <h4>編集ページ</h4>
-
+  <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">T a g 編 集</h2>
+  
   <%= form_with model: @tag, url: admin_tag_path(@tag), local: true do |f| %>
     <div class="form-group">
       <%= f.label :name, "Tag名" %>
@@ -8,4 +8,5 @@
       <%= f.submit "変更保存", class: "btn btn-sm btn-outline-info" %>
      </div>
   <% end %>
+
 </div>
