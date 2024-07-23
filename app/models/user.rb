@@ -35,4 +35,8 @@ class User < ApplicationRecord
   def admin?
     email == 'mycafe@admin.com'
   end
+  
+  def self.looks(word)
+    where("name LIKE ?", "%#{word}%")
+  end
 end

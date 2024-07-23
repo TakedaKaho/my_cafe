@@ -21,8 +21,12 @@ class Public::PostsController < ApplicationController
     end 
     
     def search
-     #@post = Post.looks(params[:search], params[:word])
-     @posts = Post.looks(params[:word])
+     #@posts = Post.looks(params[:word])
+     if params[:search] == "posts"
+      @posts = Post.looks(params[:word])
+     elsif params[:search] == "users"
+      @users = User.looks(params[:word])
+     end
     end 
     
     def tag_search

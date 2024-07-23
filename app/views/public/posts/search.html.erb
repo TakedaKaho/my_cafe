@@ -1,15 +1,17 @@
 <div class="container">
- <div class="row">
+ <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">検 索 結 果 </h2>
+ <div class="row mt-4">
   <% if params[:word].present? %>
-    <h2 class="col-6 mb-4">『<%= params[:word] %>』に関するcafe一覧</h2>
+  <h2 class="col-6 mb-4">『<%= params[:word] %>』に関する<%= params[:search] == 'users' ? 'User' : 'Cafe' %>一覧</h2>
   <% else %>
     <h5><i class="fa-solid fa-magnifying-glass"></i> 『検索キーワード』が入力されていません。</br>
       ”カフェ名”や"エリア"で調べるのもいいかもしれません<i class="fa-regular fa-face-smile"></i> <i class="fa-solid fa-heart" style="color: #9fbae9;"></i></h5>
   <% end %>
   
-    <div class="col-3 mb-4"></div>
-    <div class="col-3 mb-4">
+    <div class="col-2 mb-4"></div>
+    <div class="col-4 mb-4">
       <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
+      <%= f.select :search, options_for_select([['Posts', 'posts'], ['Users', 'users']], params[:search]) %>
       <%= f.text_field :word %>
       <%= f.submit "検索", class: "btn-sm btn-dark" %>
       <% end %>
@@ -19,23 +21,42 @@
 
 <div class="row">
   <% if params[:word].present? %>
-    <% @posts.each do |post| %>
-      <div class="col-4 mb-4">
+    <% if params[:search] == 'posts' %>
+      <% @posts.each do |post| %>
+        <div class="col-4 mb-4">
          <div class="card h-100">
-           <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
-             <%= image_tag url_for(post.post_images.last), class: "card-img-top img-thumbnail", style: "height: 200px; object-fit: cover;" %>
-             <div class="card-body">
-              <h5 class="card-title"><%= post.name %></h5>
-           <% end %>
-              <p class="card-text"><i class="fa-solid fa-location-dot fa-sm" style="color: #ff0f6f;"></i> <%= post.address %></p>
-              <p class="card-text"><strong><i class="fa-solid fa-calendar" style="color: #c6b69f;"></i> 営業日:</strong> <%= post.days_open.gsub(/\n/, '<br>').html_safe %></p>
-              <p class="card-text"><strong><i class="fa-solid fa-clock" style="color: #c6b69f;"></i> 営業時間:</strong> <%= post.hours.gsub(/\n/, '<br>').html_safe %></p>
-             </div>
+          <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
+            <%= image_tag url_for(post.post_images.last), class: "card-img-top img-thumbnail", style: "height: 200px; object-fit: cover;" %>
+            <div class="card-body">
+             <h5 class="card-title"><%= post.name %></h5>
+          <% end %>
+             <p class="card-text"><i class="fa-solid fa-location-dot fa-sm" style="color: #ff0f6f;"></i> <%= post.address %></p>
+             <p class="card-text"><strong><i class="fa-solid fa-calendar" style="color: #c6b69f;"></i> 営業日:</strong> <%= post.days_open.gsub(/\n/, '<br>').html_safe %></p>
+             <p class="card-text"><strong><i class="fa-solid fa-clock" style="color: #c6b69f;"></i> 営業時間:</strong> <%= post.hours.gsub(/\n/, '<br>').html_safe %></p>
+            </div>
          </div>
-      </div>
+        </div>
+      <% end %>
+    <% elsif params[:search] == 'users' %>
+      <% @users.each do |user| %>
+          <div class="col-2 mb-4">
+            <div class="card">
+              <%= link_to user_path(user), class: "text-decoration-none text-dark" do %>
+                <div class="card-body">
+                  <% if user.profile_image.attached? %>
+                    <%= image_tag user.profile_image, class: "card-img-top ml-1", style: "width: 110px; height: 110px; object-fit: cover;" %>
+                  <% else %>
+                    <%= image_tag "no_image.jpg", class: "card-img-top ml-1", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                  <% end %>
+                  <h6 class="card-title text-center mt-3">name: <%= user.name %></h6>
+                </div>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
     <% end %>
+    
   <% else %>
-   
   <% end %>
 </div>
 
