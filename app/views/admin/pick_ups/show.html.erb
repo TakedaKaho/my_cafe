@@ -12,12 +12,12 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h2 class="mt-4 mb-4"><i class="fa-solid fa-bullhorn"></i> PickUp記事詳細</h2>
-      <div class="card" style="background-color: #D2B48C;">
+      <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">P i c k U p 記 事 詳 細</h2>
+      <div class="card" style="background-color: #F0F8FF;">
         <div class="card-body">
           
-          <div class="row justify-content-center">
-            <h2 class="card-title text-white", style="font-family: 'Helvetica', sans-serif;">『 <%= @pick_up.title %> 』</h2>
+          <div class="row justify-content-center mt-4">
+            <h2 class="card-title", style="font-family: 'Helvetica', sans-serif;">『 <%= @pick_up.title %> 』</h2>
             <% if @pick_up.pick_up_images.attached? %>
                 <div class="mt-4">
                   <% @pick_up.pick_up_images.each do |image| %>
