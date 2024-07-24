@@ -14,7 +14,7 @@ class Admin::PickUpsController < ApplicationController
     end
     
     def index
-      @pick_ups = PickUp.all.page(params[:page]).per(20)
+      @pick_ups = PickUp.order(created_at: :desc).page(params[:page]).per(20)
     end 
     
     def show
