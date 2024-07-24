@@ -11,4 +11,8 @@ class Admin::CommentsController < ApplicationController
      flash[:comment_destroy_notice]="正常にコメントを削除しました"
      redirect_to admin_comments_path
     end 
+    
+    def search
+     @comments = Comment.looks(params[:word]).order(created_at: :desc)
+    end 
 end

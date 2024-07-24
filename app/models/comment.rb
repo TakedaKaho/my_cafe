@@ -23,4 +23,8 @@ class Comment < ApplicationRecord
       )
     end
   end
+  
+  def self.looks(word)
+    where("comment LIKE ?", "%#{word}%")
+  end
 end
