@@ -1,16 +1,16 @@
 <div class="container">
-<h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">U s e r 一 覧</h2>
-
-<div class="col-md-12 mt-4 mb-4 text-right">
-<%= form_with url: search_admin_users_path, local: true, method: :get do |f| %>
-  <%= f.text_field :word, placeholder: "ユーザー名（不適切）" %>
-  <%= f.submit "検索", class: "btn-sm btn-dark" %>
-<% end %>
-</div>
-
- <div class="row justify-content-center">
+  <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">検 索 結 果</h2>
   
-  <table class="table">
+  <div class="col-md-12 mt-4 mb-4 text-right">
+    <%= form_with url: search_admin_users_path, local: true, method: :get do |f| %>
+     <%= f.text_field :word, placeholder: "ユーザー名（不適切）" %>
+     <%= f.submit "検索", class: "btn-sm btn-dark" %>
+    <% end %>
+  </div>
+
+  <div class="row mt-4">
+    <% if params[:word].present? %>
+     <table class="table">
         <thead class="text-center">
           <tr>
             <th>会員ID</th>
@@ -53,10 +53,13 @@
         </tbody>
         
       </table>
-      
-      <div class="pagination justify-content-center">
-        <%= paginate @users, theme: 'twitter-bootstrap-4' %>
-      </div>
+    <% end %>
+  </div>
   
- </div>
+  <div class="row d-flex justify-content-center mt-3 mb-3">
+    <%= link_to  admin_users_path, class: "btn  btn-outline-dark mr-1" do %>
+      <i class="fa-solid fa-rotate-left"></i> user一覧へ戻る
+    <% end %>
+  </div>
+  
 </div>

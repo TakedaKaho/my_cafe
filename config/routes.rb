@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     resources :posts
     resources :pick_ups
     resources :tags, only: [:index, :create, :edit, :update, :destroy]
-    resources :users, only: [:index, :edit, :update, :show]
+    resources :users, only: [:index, :edit, :update, :show] do
+      collection do
+        get 'search'
+      end
+    end 
     resources :comments, only: [:index, :destroy] do
       collection do
         get 'search'

@@ -24,6 +24,10 @@ class Admin::UsersController < ApplicationController
      end
     end
     
+    def search
+     @users = User.looks(params[:word]).order(created_at: :desc)
+    end
+    
  private
  
     def user_params
