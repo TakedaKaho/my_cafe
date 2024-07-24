@@ -7,7 +7,7 @@ class Admin::PickUpsController < ApplicationController
     def create
       @pick_up = PickUp.new(pick_up_params)
       if @pick_up.save
-        redirect_to admin_pick_up_path(@pick_up), create_notice: "PickUp記事を作成しました。"
+        redirect_to admin_pick_up_path(@pick_up)
       else
         render :new
       end
@@ -28,7 +28,8 @@ class Admin::PickUpsController < ApplicationController
     def update
       @pick_up = PickUp.find(params[:id])
        if @pick_up.update(pick_up_params)
-         redirect_to admin_pick_up_path(@pick_up), update_notice: "PickUp記事を更新しました。"
+         flash[:update_notice]="正常に変更内容が反映されました。"
+         redirect_to admin_pick_up_path(@pick_up)
        else
          render :edit
        end
@@ -37,7 +38,8 @@ class Admin::PickUpsController < ApplicationController
     def destroy
       @pick_up = PickUp.find(params[:id])
       @pick_up.destroy
-      redirect_to admin_pick_ups_path, pick_destroy_notice: "PickUp記事を削除しました。"
+      flash[:destroy_notice]="PickUp記事を正常に削除しました。"
+      redirect_to admin_pick_ups_path
     end 
     
   private
