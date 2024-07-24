@@ -1,21 +1,25 @@
-<!-- 成功メッセージを表示 -->
 <% if flash[:success].present? %>
   <div class="alert alert-success">
     <%= flash[:success] %>
   </div>
 <% end %>
 
-<!-- エラーメッセージを表示 -->
+
 <% if flash.now[:error].present? %>
   <div class="alert alert-danger">
     <%= flash.now[:error] %>
   </div>
 <% end %>
 
-<!-- flash[:tag_update_notice] を表示 -->
 <% if flash[:tag_update_notice].present? %>
   <div class="ml-4 alert alert-info">
     <%= flash[:tag_update_notice] %>
+  </div>
+<% end %>
+
+<% if flash[:tag_destroy_notice].present? %>
+  <div class="ml-4 alert alert-warning">
+    <%= flash[:tag_destroy_notice] %>
   </div>
 <% end %>
 
