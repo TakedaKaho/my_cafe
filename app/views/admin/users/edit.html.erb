@@ -1,5 +1,15 @@
 <div class="container">
   
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <h6><%= pluralize(@user.errors.count, "件のエラー") %> により変更を保存できませんでした。</h6>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">U s e r 情 報 編 集</h2>
   
   <%= form_with model: @user,url: admin_user_path(@user), method: :patch, local: true do |f| %>

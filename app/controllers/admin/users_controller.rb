@@ -19,6 +19,7 @@ class Admin::UsersController < ApplicationController
        flash[:user_notice]="ユーザー情報を更新しました。"
        redirect_to admin_user_path(@user)
      else
+       flash[:edit_error_notice] = "プロフィールが正常に変更されました"
        render :edit
      end
     end
