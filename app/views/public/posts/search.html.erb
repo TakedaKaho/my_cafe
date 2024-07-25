@@ -1,13 +1,10 @@
 <div class="container">
-  <!-- タイトル -->
   <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">検 索 結 果 </h2>
 
   <div class="row mt-4">
     <div class="col-12 mb-4">
       <% if params[:word].present? %>
-        <h2>
-          『<%= params[:word] %>』に関する<%= params[:search] == 'users' ? 'User' : 'Cafe' %>一覧
-        </h2>
+        <h2>『<%= params[:word] %>』に関する<%= params[:search] == 'users' ? 'User' : 'Cafe' %>一覧</h2>
       <% else %>
         <h5>
           <i class="fa-solid fa-magnifying-glass"></i> 『検索キーワード』が入力されていません。</br>

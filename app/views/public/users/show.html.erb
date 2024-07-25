@@ -25,7 +25,7 @@
         <% end %>
         <div class="card-body">
           <h4 class="card-title">Name</h4>
-          <p class="card-text"><%= @user.name %></p>
+           <p class="card-text"><%= @user.name %></p>
           <% if @user.body.present? %>
            <p class="card-text"><%= @user.body.gsub(/\n/, '<br>').html_safe %></p>
           <% else %>
@@ -48,9 +48,7 @@
             退会 <i class="fa-solid fa-bomb"></i>
           <% end %>
         </div>
-
       <% end %>
-      
     </div>
     
     <!--いいね一覧-->
@@ -73,16 +71,15 @@
         <% end %>
       </div>
       
-    <div class="row justify-content-center mb-3 mt-1">
-     <div class="col-12 text-center">
-      <% if user_signed_in? && @user == current_user %>
-        <%= link_to "自分のいいねを全て見る", likes_user_path(current_user), class: "btn btn-sm btn-outline-dark mt-2" %>
-      <% else %>
-        <%= link_to "#{@user.name} さんのいいねを全て見る", likes_user_path(@user), class: "btn btn-sm btn-outline-dark" %>
-      <% end %>
-     </div>
-    </div>
-
+      <div class="row justify-content-center mb-3 mt-1">
+        <div class="col-12 text-center">
+          <% if user_signed_in? && @user == current_user %>
+           <%= link_to "自分のいいねを全て見る", likes_user_path(current_user), class: "btn btn-sm btn-outline-dark mt-2" %>
+          <% else %>
+           <%= link_to "#{@user.name} さんのいいねを全て見る", likes_user_path(@user), class: "btn btn-sm btn-outline-dark" %>
+          <% end %>
+        </div>
+      </div>
     </div>
     
   </div>
