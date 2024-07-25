@@ -1,20 +1,17 @@
 <div class="container">
-
-<div class ="row">
-
-<div class="col-6">
-<h3><%= @post.name %>をいいねしたユーザー一覧</h3>
-</div>
-<div class="col-2"></div>
-<div class="col-4">
+ <div class ="row">
+  <div class="col-6">
+   <h3><%= @post.name %>をいいねしたユーザー一覧</h3>
+  </div>
+  <div class="col-2"></div>
+  <div class="col-4">
     <%= link_to post_path(@post), class: "btn btn-outline-dark" do %>
-  <i class="fa-solid fa-rotate-left"></i> <%= @post.name %>詳細ページに戻る
-<% end %>
-</div>
-</div>
+      <i class="fa-solid fa-rotate-left"></i> <%= @post.name %>詳細ページに戻る
+    <% end %>
+  </div>
+ </div>
 
-
-<div class="row">
+ <div class="row">
   <% @post.likes.each do |like| %>
     <div class="col-md-2 col-sm-4 col-6 mb-2">
       <%= link_to user_path(like.user), class: "text-decoration-none text-dark" do %>
@@ -32,6 +29,5 @@
       <% end %>
     </div>
   <% end %>
-</div>
-
+ </div>
 </div>
