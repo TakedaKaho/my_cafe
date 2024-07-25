@@ -1,4 +1,10 @@
 ## mycafe（マイカフ）
+<img width="622" alt="スクリーンショット 2024-07-25 18 45 42" src="https://github.com/user-attachments/assets/8b03c9e9-c215-45bb-9c98-c49d8e08062b">
+<img width="834" alt="スクリーンショット 2024-07-25 18 52 07" src="https://github.com/user-attachments/assets/92621343-94c0-4745-8454-4ebc12278870">
+
+
+
+
 
 ## サイト概要
 ### サイトテーマ
