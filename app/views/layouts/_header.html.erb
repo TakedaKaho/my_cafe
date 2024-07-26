@@ -1,36 +1,47 @@
-  <% if current_user && current_user.email == User::GUEST_USER_EMAIL %>
-  <div class="border-bottom row mt-2 ">
+<% if current_user && current_user.email == User::GUEST_USER_EMAIL %>
+  <nav class="navbar navbar-expand-md navbar-light border-bottom">
+  <a class="navbar-brand" href="<%= root_path %>">
+    <%= image_tag '3.png', size: '190x120' %>
+  </a>
 
-    <div class="mr-4 mb-1 ml-2 col-md-3 col-6 d-flex align-items-center">
-      <%= link_to root_path do %>
-        <%= image_tag '3.png', size: '190x120' %>
-      <% end %>
-    </div>
-    
-    <div class="col-md-8 col-12 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-end align-items-center">
-        
-      <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-        My Page <i class="fa-solid fa-user"></i>
-      <% end %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-      <%= link_to posts_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-        Cafe一覧 <i class="fa-solid fa-mug-hot"></i>
-      <% end %>
+  <div class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+          My Page <i class="fa-solid fa-user"></i>
+        <% end %>
+      </li>
 
-      <%= link_to pick_ups_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-        今週のPickUp cafe <i class="fa-solid fa-heart" style="color: #e85967;"></i></i>
-      <% end %>
+      <li class="nav-item">
+        <%= link_to posts_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+          Cafe一覧 <i class="fa-solid fa-mug-hot"></i>
+        <% end %>
+      </li>
 
-      <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-         Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i>
-      <% end %>
-    </div>
+      <li class="nav-item">
+        <%= link_to pick_ups_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+          今週のPickUp cafe <i class="fa-solid fa-heart" style="color: #e85967;"></i>
+        <% end %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+          Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <% end %>
+      </li>
+    </ul>
   </div>
+</nav>
+
+<div class="row mt-3"></div>
+
   
-  <div class="row mt-3"></div>
   
-  
-  <% elsif admin_signed_in? %>
+<% elsif admin_signed_in? %>
   <div class="border-bottom row">
   
     <div class="col-md-2 col-6">
@@ -43,6 +54,7 @@
       <%= image_tag 'admin2.png', size: '190x120' %>
     </div>
     <div class="col-5"></div>
+    
     <div class="col-md-3 col-6 d-flex justify-content-center align-items-center">
       <%= link_to destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark mt-auto mr-2 mb-auto ml-4", style: "font-size: 15px; padding: 10px 20px;" do %>
       <i class="fa-solid fa-right-from-bracket"></i>Log Out
@@ -51,25 +63,26 @@
     
   </div>
  
-    
 <% elsif user_signed_in? %>
-  <div class="border-bottom row mt-2">
-
-    <div class="mr-4 mb-1 ml-2 col-md-3 col-6 d-flex align-items-center">
-      <%= link_to root_path do %>
-        <%= image_tag '3.png', size: '190x120' %>
-      <% end %>
-    </div>
-    
-    
-    <div class="col-md-8 col-12 mt-4 mr-0 mb-4 ml-0 d-flex justify-content-end align-items-center">
+<nav class="navbar navbar-expand-md navbar-light border-bottom">
+  <a class="navbar-brand" href="<%= root_path %>">
+    <%= image_tag '3.png', size: '190x120' %>
+  </a>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
       
-      <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-        My Page <i class="fa-solid fa-user"></i>
-      <% end %>
+      <li class="nav-item">
+        <%= link_to user_path(current_user), class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+          My Page <i class="fa-solid fa-user"></i>
+        <% end %>
+      </li>
       
-      <!-- 通知ボタン -->
-      <div class="dropdown">
+      <li class="nav-item dropdown">
         <button class="btn btn-outline-dark rounded-pill btn-sm dropdown-toggle mr-3" type="button" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa-solid fa-bell fa-lg" style="color: #403f3f;"></i>
           <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
@@ -87,41 +100,55 @@
             <a class="dropdown-item" href="#">現在未読の通知はありません</a>
           <% end %>
         </div>
-      </div>
-
-   
-      <%= link_to posts_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-        Cafe一覧 <i class="fa-solid fa-mug-hot"></i>
-      <% end %>
-    
-      <%= link_to pick_ups_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
-        <i class="fa-solid fa-bullhorn"></i> 今週のPickUp cafe</i>
-      <% end %>
+      </li>
       
-    </div>
+      <li class="nav-item">
+        <%= link_to posts_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+          Cafe一覧 <i class="fa-solid fa-mug-hot"></i>
+        <% end %>
+      </li>
+      
+      <li class="nav-item">
+        <%= link_to pick_ups_path, class: "btn btn-outline-dark rounded-pill btn-sm mr-3" do %>
+          <i class="fa-solid fa-bullhorn"></i> 今週のPickUp cafe
+        <% end %>
+      </li>
+      
+    </ul>
   </div>
-  
-  <div class="row mt-3"></div>
+</nav>
+
+<div class="row mt-3"></div>
+
 
  
   
-  <% else %>
+<% else %>
   
-    <div class="row border-bottom mt-1">
-    <div class="col-md-3 col-12 ml-md-2">
-      <%= link_to root_path do %>
-        <%= image_tag '3.png', size: '190x120' %>
-      <% end %>
-    </div>
-    <div class ="col-1"></div>
-    <div class="col-md-7 col-12 d-flex justify-content-end align-items-center">
-      <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto" %>
-      <%= link_to "Log In", new_user_session_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto"%>
-      <%= link_to "新規登録", new_user_registration_path, class: "btn btn btn-outline-dark rounded-pill mt-auto mr-3 mb-auto" %>
-      
-    </div>
+<nav class="navbar navbar-expand-md navbar-light border-bottom">
+  <a class="navbar-brand" href="<%= root_path %>">
+    <%= image_tag '3.png', size: '190x120' %>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-dark rounded-pill  mr-3" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-dark rounded-pill mr-3" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-dark rounded-pill mr-3" %>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-    </div>
+<div class="row mt-3"></div>
+
+
     
-    
-  <% end %>
+<% end %>
