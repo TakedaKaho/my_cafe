@@ -1,25 +1,27 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-8">
-      <div class="my-5 text-center">
-        <h5>本当に退会しますか?</h5>
-      </div>
-      <div class="text-center">
-        退会すると、会員情報や<br>
-        これまでのいいね・評価が削除されます。<br>
-        退会する場合は「 退会する 」をクリックしてください。
-      </div>
-
-      <div class="mb-3 text-center">
-        <%= link_to  out_users_path(current_user), method: :patch, class:'btn btn-danger' do %>
-          退会する <i class="fa-regular fa-face-sad-tear"></i>
-        <% end %>
-        <%= link_to user_path(current_user), class:'btn btn-primary ml-4' do %>
-          退会しない <i class="fa-regular fa-face-smile"></i>
-        <% end %>
+    <div class="col-lg-6">
+      <div class="card my-4">
+        <div class="card-body text-center">
+          <h3 class="card-title">本当に退会しますか?</h3>
+          <p class="card-text">
+            退会すると、会員情報や<br>
+            これまでのいいね・評価が削除されます。<br>
+            退会する場合は「退会する」をクリックしてください。
+          </p>
+          <div class="mb-3 text-center mt-3">
+            <%= link_to out_users_path(current_user), method: :patch, class:'btn btn-danger' do %>
+              退会する <i class="fa-regular fa-face-sad-tear"></i>
+            <% end %>
+            <%= link_to user_path(current_user), class:'btn btn-primary ml-4' do %>
+              退会しない <i class="fa-regular fa-face-smile"></i>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 
 
