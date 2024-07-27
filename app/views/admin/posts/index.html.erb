@@ -21,7 +21,6 @@
           <table class="table">
             <thead class="text-center">
               <tr>
-                <th>ID</th>
                 <th>画像</th>
                 <th>名前</th>
                 <th>平均評価</th>
@@ -32,10 +31,9 @@
             <tbody class="text-center">
               <% @posts.each do |post| %>
                 <tr>
-                  <td><%= post.id %></td>
                   <td>
                     <% if post.post_images.attached? %>
-                      <%= image_tag url_for(post.post_images.first), class: "img-thumbnail", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                      <%= image_tag url_for(post.post_images.first), class: "img-thumbnail", style: "width: 150px; height: 110px; object-fit: cover;" %>
                     <% else %>
                       No Image
                     <% end %>
