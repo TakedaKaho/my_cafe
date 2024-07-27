@@ -8,7 +8,7 @@ class Admin::TagsController < ApplicationController
         redirect_to admin_tags_path
       else
         flash.now[:error] = "タグの作成に失敗しました。"
-        @tags = Tag.all.page(params[:page]).per(12)
+        @tags = Tag.order(created_at: :desc).page(params[:page]).per(12)
         @tag_count = Tag.count
         render :index
       end 
@@ -16,7 +16,7 @@ class Admin::TagsController < ApplicationController
     
     def index
       @tag = Tag.new
-      @tags = Tag.all.page(params[:page]).per(12)
+      @tags = Tag.order(created_at: :desc).page(params[:page]).per(12)
       @tag_count = Tag.count
     end
 
