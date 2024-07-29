@@ -44,6 +44,17 @@
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
+
+## 使用技術
+- Bootstrap 4 (Carousel / Modal)
+- JavaScript (jQuery)
+- Swiper
+
+## 使用技術
+- Devise: 認証
+- kaminari
+- bootstrap4-kaminari-views
+- rails-i18n: 多言語対応
 ​
 ## 使用素材
 
