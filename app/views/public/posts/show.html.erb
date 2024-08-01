@@ -74,27 +74,31 @@
         <%= form.text_area :comment, required: true, class: "form-control" %>
       </div>
 
-      <div class="form-group mt-2" id="star">
-        <%= form.hidden_field :star, id: :post_star, class: 'form-control' %>
-        <div id="post_raty"></div>
-      </div>
-      
-      <script>
-        $(document).on('turbolinks:load', function() {
-          let elem = document.querySelector('#post_raty');
-          if (elem == null) return;
+    <div class="form-group mt-2" id="star">
+     <%= form.hidden_field :star, id: :post_star, class: 'form-control' %>
+     <div id="post_raty"></div>
+    </div>
 
-          elem.innerHTML = "";
-          let opt = {
-            starOn: "<%= asset_path('star-on.png') %>",
-            starOff: "<%= asset_path('star-off.png') %>",
-            scoreName: 'comment[star]', // データを送りたいモデル名[カラム名]
-            hints: ['改善の余地あり', 'まあまあ', '良い', 'とても良い', '最高！'] 
-          };
-          raty(elem, opt);
-        });
-      </script>
-      
+    <p>Hint : <span id="hint"></span></p>
+
+    <script>
+      $(document).on('turbolinks:load', function() {
+       let elem = document.querySelector('#post_raty');
+       if (elem == null) return;
+
+        elem.innerHTML = "";
+        let opt = {
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          scoreName: 'comment[star]', // データを送りたいモデル名[カラム名]
+          hints: ['普通', '良い', 'おすすめ', 'かなりおすすめ', '非常におすすめ'],
+          target: '#hint',
+          targetType: 'hint'
+         };
+       raty(elem, opt);
+      });
+    </script>
+
       <%= form.submit "コメントを投稿する", class: "btn btn-sm btn-outline-dark mt-2 mb-2" %>
     <% end %>
     <% else %>
