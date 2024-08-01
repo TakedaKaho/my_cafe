@@ -1,67 +1,67 @@
 <div class="container">
- <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">タ グ 検 索 ペ ー ジ </h2>
-  <div class="row mb-2">
-    <div class="col-12 col-md-9 mt-3">
-      <!-- 三項演算子-->
-      <h4><%= @tag ? "##{@tag.name} の検索結果" : "タグが見つかりませんでした" %></h4>
-    </div>
-    
-    <div class="col-12 col-md-3 text-md-right mt-3">
-      <%= form_with url: tag_search_posts_path, local: true, method: :get, class: "d-flex" do |f| %>
-        <%= f.text_field :tag, placeholder: "タグ検索", class: "form-control small-text-field" %>
-        <%= f.submit "検索", class: "btn btn-info btn-sm" %>
-      <% end %>
-    </div>
-  </div>
-
-  <!-- 投稿一覧 -->
- <% if @posts.present? %>
   <div class="row">
-    <% @posts.each do |post| %>
-     <div class="col-12 col-sm-6 col-md-4 mb-4">
-      <div class="card h-100">
-       <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
-        <%= image_tag url_for(post.post_images.first), class: "card-img-top img-thumbnail", style: "height: 250px; object-fit: cover;", alt: "Post image" %>
-          <div class="card-body">
-           <h5 class="card-title"><%= post.name %></h5>
-           <p class="card-text"><i class="fa-solid fa-location-dot fa-sm" style="color: #ff0f6f;"></i> <%= post.address %></p>
-             <% if post.tags.any? %>
-              <div class="mt-2">
-                <% post.tags.each do |tag| %>
-                  <%= link_to tag_search_posts_path(tag: tag.name), class: "badge bg-info text-white me-1" do %>
-                    #<%= tag.name %>
-                  <% end %>
-                <% end %>
-              </div>
-             <% end %>
-          </div>
-       <% end %>
-      </div>
-     </div>
-    <% end %>
-  </div>
-  <% else %>
- <div class="container mt-4">
-  <div class="alert alert-warning" role="alert">
-    <p class="mb-0">このタグに一致する投稿はありません。</p>
-  </div>
-
-  <div class="container mt-4">
-  <h5 class="mt-4">タグ一覧</h5>
-  <div class="row">
-    <% @tags.each do |tag| %>
-      <div class="col-md-2 col-sm-6 mb-4">
-        <div class="card">
-          <%= link_to tag_search_posts_path(tag: tag.name), class: "badge badge-info text-white" do %>
-            #<%= tag.name %>
+    <div class="col-md-3 d-none d-md-block">
+      <!-- サイドバー -->
+      <div class="sidebar bg-light p-3">
+        <h5 class="mt-4">タグ一覧</h5>
+        <div class="list-group">
+          <% @tags.each do |tag| %>
+            <%= link_to tag_search_posts_path(tag: tag.name), class: "list-group-item list-group-item-action" do %>
+              #<%= tag.name %>
+            <% end %>
           <% end %>
         </div>
       </div>
-    <% end %>
-  </div>
-  </div>
+    </div>
 
- </div>
+    <div class="col-md-9">
+      <!-- メインコンテンツ -->
+      <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">タグ検索ページ</h2>
+      <div class="row mb-2">
+        <div class="col-12 col-md-9 mt-3">
+          <h4><%= @tag ? "##{@tag.name} の検索結果" : "タグが見つかりませんでした" %></h4>
+        </div>
 
-  <% end %>
+        <div class="col-12 col-md-3 text-md-right mt-3">
+          <%= form_with url: tag_search_posts_path, local: true, method: :get, class: "d-flex" do |f| %>
+            <%= f.text_field :tag, placeholder: "タグ検索", class: "form-control small-text-field" %>
+            <%= f.submit "検索", class: "btn btn-info btn-sm" %>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- 投稿一覧 -->
+      <% if @posts.present? %>
+        <div class="row">
+          <% @posts.each do |post| %>
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+              <div class="card h-100">
+                <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
+                  <%= image_tag url_for(post.post_images.first), class: "card-img-top img-thumbnail", style: "height: 250px; object-fit: cover;", alt: "Post image" %>
+                  <div class="card-body">
+                    <h5 class="card-title"><%= post.name %></h5>
+                    <p class="card-text"><i class="fa-solid fa-location-dot fa-sm" style="color: #ff0f6f;"></i> <%= post.address %></p>
+                    <% if post.tags.any? %>
+                      <div class="mt-2">
+                        <% post.tags.each do |tag| %>
+                          <%= link_to tag_search_posts_path(tag: tag.name), class: "badge bg-info text-white me-1" do %>
+                            #<%= tag.name %>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="alert alert-warning" role="alert">
+          <p class="mb-0">このタグに一致する投稿はありません。</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
+
