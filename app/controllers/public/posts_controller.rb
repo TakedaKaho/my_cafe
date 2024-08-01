@@ -30,6 +30,7 @@ class Public::PostsController < ApplicationController
     end 
     
     def tag_search
+     @tags = Tag.all
      @tag = Tag.find_by(name: params[:tag])
      #@posts = @tag ? @tag.posts : Post.none　三項演算子のコード
      #下記と同じ。

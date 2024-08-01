@@ -41,6 +41,27 @@
     <% end %>
   </div>
   <% else %>
-    <p>このタグに一致する投稿はありません。</p>
+ <div class="container mt-4">
+  <div class="alert alert-warning" role="alert">
+    <p class="mb-0">このタグに一致する投稿はありません。</p>
+  </div>
+
+  <div class="container mt-4">
+  <h5 class="mt-4">タグ一覧</h5>
+  <div class="row">
+    <% @tags.each do |tag| %>
+      <div class="col-md-2 col-sm-6 mb-4">
+        <div class="card">
+          <%= link_to tag_search_posts_path(tag: tag.name), class: "badge badge-info text-white" do %>
+            #<%= tag.name %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  </div>
+
+ </div>
+
   <% end %>
 </div>
