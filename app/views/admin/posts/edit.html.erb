@@ -23,6 +23,7 @@
         
         <h6>< preview ></h6>
         <div id="image_preview"></div>
+
         
         <h6>< 現在の画像 ></h6>
         <% @post.post_images.each do |image| %>
@@ -85,18 +86,22 @@ document.addEventListener("turbolinks:load", function() {
     const fileFields = document.querySelectorAll("input[type='file']");
     if (fileFields.length < 3) { // 3つ未満の場合のみ追加
       const newFileField = fileFields[0].cloneNode(); // 最初のフィールドをクローン
+      newFileField.setAttribute('data-index', fileFields.length); // data-index属性を設定
       fileFields[0].parentNode.insertBefore(newFileField, fileFields[0].nextSibling);
 
       newFileField.addEventListener('change', handleFileSelect);
     }
   });
 
-  document.querySelectorAll("input[type='file']").forEach(fileField => {
+  document.querySelectorAll("input[type='file']").forEach((fileField, index) => {
+    fileField.setAttribute('data-index', index); // data-index属性を設定
     fileField.addEventListener('change', handleFileSelect);
   });
 
   function handleFileSelect(event) {
     const files = event.target.files;
+    const fileField = event.target;
+    const index = fileField.getAttribute('data-index'); // data-index属性からインデックスを取得
 
     Array.from(files).forEach(file => {
       const reader = new FileReader();
@@ -109,11 +114,35 @@ document.addEventListener("turbolinks:load", function() {
         imgElement.classList.add('img-thumbnail', 'mt-2');
         imgElement.style.objectFit = 'cover';
 
-        imagePreviewContainer.appendChild(imgElement);
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('img-container');
+        imgContainer.style.position = 'relative';
+        imgContainer.style.display = 'inline-block';
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = '削除';
+        removeButton.classList.add('btn', 'btn-danger', 'btn-sm');
+        removeButton.style.position = 'absolute';
+        removeButton.style.top = '5px';
+        removeButton.style.right = '5px';
+
+        removeButton.addEventListener('click', function() {
+          imgContainer.remove();
+          // 対応するファイルフィールドをクリア
+          const fileField = document.querySelector(`input[type='file'][data-index='${index}']`);
+          if (fileField) {
+            fileField.value = ''; // ファイルフィールドの値をクリア
+          }
+        });
+
+        imgContainer.appendChild(imgElement);
+        imgContainer.appendChild(removeButton);
+        imagePreviewContainer.appendChild(imgContainer);
       };
 
       reader.readAsDataURL(file);
     });
   }
 });
+
 </script>
