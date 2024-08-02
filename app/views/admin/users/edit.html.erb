@@ -1,5 +1,4 @@
 <div class="container">
-  
   <% if @user.errors.any? %>
     <div class="alert alert-danger">
       <h6><%= pluralize(@user.errors.count, "件のエラー") %> により変更を保存できませんでした。</h6>
@@ -26,6 +25,7 @@
           <% end %>
         </div>
       </div>
+      
       <div class="col-md-8">
         <div class="form-group">
           <%= f.label :name, "名前" %>
@@ -60,7 +60,6 @@
       
       if (file) {
         const reader = new FileReader();
-        
         reader.onload = function(e) {
           // プレビューを更新
           currentImage.src = e.target.result;
@@ -70,5 +69,4 @@
     });
   }
 });
-
 </script>
