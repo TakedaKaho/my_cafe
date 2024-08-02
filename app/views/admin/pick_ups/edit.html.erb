@@ -16,14 +16,15 @@
   <% end %>
   
   <%= form_with model: @pick_up, url: admin_pick_up_path(@pick_up), method: :patch, local: true, multipart: true, class: "pick-up-form" do |form| %>
-    <div class="mb-4">
-      <%= form.label :pick_up_images, "画像:3枚", class: "form-label" %>
-      <%= form.file_field :pick_up_images, multiple: true, accept: "image/*", class: "form-control pick-up-image-input" %>
-      <button type="button" class="ml-2 mt-2 btn btn-sm btn-outline-secondary add-file-field">画像を追加</button>
-    </div>
+  <div class="mb-4">
+    <%= form.label :pick_up_images, "画像:3枚", class: "form-label" %>
+    <%= form.file_field :pick_up_images, multiple: true, accept: "image/*", class: "form-control pick-up-image-input" %>
+    <button type="button" class="ml-2 mt-2 btn btn-sm btn-outline-secondary add-file-field">画像を追加</button>
+  </div>
 
-    <h6>< preview ></h6>
-    <div class="image-preview"></div>
+  <h6>< preview ></h6>
+  <div class="image-preview"></div>
+
 
     <h6>< 現在の画像 ></h6>
     <% @pick_up.pick_up_images.each do |image| %>
@@ -65,6 +66,8 @@ document.addEventListener("turbolinks:load", function() {
       const fileFields = form.querySelectorAll(".pick-up-image-input");
       if (fileFields.length < 3) { // 3つ未満の場合のみ追加
         const newFileField = fileFields[0].cloneNode(); // 最初のフィールドをクローン
+        newFileField.value = ''; // クリアしてから追加
+        newFileField.setAttribute('data-index', fileFields.length); // インデックスを設定
         fileFields[0].parentNode.insertBefore(newFileField, fileFields[0].nextSibling);
 
         newFileField.addEventListener('change', handleFileSelect);
@@ -80,19 +83,39 @@ document.addEventListener("turbolinks:load", function() {
 
     function handleFileSelect(event) {
       const files = event.target.files;
+      const fileField = event.target;
+      const index = fileField.getAttribute('data-index'); // インデックスを取得
 
       Array.from(files).forEach(file => {
         const reader = new FileReader();
 
         reader.onload = function(event) {
+          const imgContainer = document.createElement('div');
+          imgContainer.classList.add('image-container');
+          imgContainer.dataset.index = index; // インデックスを設定
+          
           const imgElement = document.createElement('img');
           imgElement.src = event.target.result;
           imgElement.width = 100;
           imgElement.height = 100;
           imgElement.classList.add('img-thumbnail', 'mt-2');
           imgElement.style.objectFit = 'cover';
-
-          imagePreviewContainer.appendChild(imgElement);
+          
+          const removeButton = document.createElement('button');
+          removeButton.textContent = '削除';
+          removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'mt-2');
+          removeButton.addEventListener('click', function() {
+            imgContainer.remove(); // 画像とボタンを含む親要素を削除
+            // フォームフィールドの削除処理を追加
+            const fileField = document.querySelector(`input.pick-up-image-input[data-index='${index}']`);
+            if (fileField) {
+              fileField.value = ''; // 対応するファイルフィールドをクリア
+            }
+          });
+          
+          imgContainer.appendChild(imgElement);
+          imgContainer.appendChild(removeButton);
+          imagePreviewContainer.appendChild(imgContainer);
         };
 
         reader.readAsDataURL(file);
@@ -100,4 +123,5 @@ document.addEventListener("turbolinks:load", function() {
     }
   });
 });
+
 </script>
