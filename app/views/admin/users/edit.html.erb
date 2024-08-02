@@ -10,20 +10,21 @@
       </ul>
     </div>
   <% end %>
+  
   <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">U s e r 情 報 編 集</h2>
   
-  <%= form_with model: @user,url: admin_user_path(@user), method: :patch, local: true do |f| %>
+  <%= form_with model: @user, url: admin_user_path(@user), method: :patch, local: true, html: { multipart: true } do |f| %>
     <div class="row mt-4">
       <div class="col-md-4">
         <div class="form-group">
           <%= f.label :profile_image, "プロフィール画像" %>
-          <%= f.file_field :profile_image, accept: "image/*", class: "form-control-file" %>
+          <%= f.file_field :profile_image, accept: "image/*", class: "form-control-file", id: "profile_image_input" %>
+          <% if @user.profile_image.attached? %>
+            <%= image_tag url_for(@user.profile_image), id: "current_image", class: "img-thumbnail mt-2" %>
+          <% else %>
+            <%= image_tag "no_image.jpg", class: "img-thumbnail mt-2", size: "200x200" %>
+          <% end %>
         </div>
-        <% if @user.profile_image.attached? %>
-          <%= image_tag url_for(@user.profile_image), class: "img-thumbnail mt-2" %>
-        <% else %>
-          <%= image_tag "no_image.jpg", class: "img-thumbnail mt-2", size: "200x200" %>
-        <% end %>
       </div>
       <div class="col-md-8">
         <div class="form-group">
@@ -48,3 +49,26 @@
   <% end %>
 </div>
 
+<script>
+  document.addEventListener("turbolinks:load", function() {
+  const profileImageInput = document.getElementById("profile_image_input");
+  const currentImage = document.getElementById("current_image");
+
+  if (profileImageInput) {
+    profileImageInput.addEventListener("change", function(event) {
+      const file = event.target.files[0];
+      
+      if (file) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          // プレビューを更新
+          currentImage.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+});
+
+</script>
