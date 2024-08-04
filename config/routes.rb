@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   #namescapeからscopeにしたことでpublic出ないように、
   scope module: :public do
     root to: "homes#top"
-    get '/about', to: 'homes#about'
+    get '/terms', to: 'homes#terms'
     
     resources :users, only: [:show, :edit, :update] do
       collection do
