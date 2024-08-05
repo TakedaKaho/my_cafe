@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get '/terms', to: 'homes#terms'
+    get '/privacy', to:'homes#privacy'
     
     resources :users, only: [:show, :edit, :update] do
       collection do

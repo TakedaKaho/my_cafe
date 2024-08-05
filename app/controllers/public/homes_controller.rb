@@ -5,4 +5,7 @@ class Public::HomesController < ApplicationController
     
     def terms
     end 
+    
+    def privacy
+    end 
 end

@@ -4,7 +4,10 @@
   <div class="col-4 d-flex flex-column justify-content-center align-items-center">
     <h6 class="mt-4"><i class="fa-solid fa-cookie-bite fa-sm" style="color: #90774c;"></i> my cafe</h6>
     <%= link_to terms_path, class: 'text-decoration-none text-dark' do %>
-      <h6 class="mb-0"><i class="fa-solid fa-file-lines fa-sm" style="color: #717d94;"></i> 利用規約</h6>
+      <h6 class="mb-2"><i class="fa-solid fa-file-lines fa-sm" style="color: #717d94;"></i> 利用規約</h6>
+    <% end %>
+    <%= link_to privacy_path, class: 'text-decoration-none text-dark' do %>
+      <h6 class="mb-0"><i class="fa-solid fa-user-lock fa-xs" style="color: #333333;"></i> プライバシーポリシー</h6>
     <% end %>
 　</div>
 
