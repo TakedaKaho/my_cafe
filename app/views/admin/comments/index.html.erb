@@ -36,7 +36,10 @@
         <td><%= comment.user.name if comment.user %></td>
         <td><%= comment.comment %></td>
         <td><i class="fa-solid fa-star fa-sm" style="color: #FFD43B;"></i> <%= comment.star %>点</td>
-        <td><%= comment.post.name %></td>
+        <td>
+          <%= link_to post_path(comment.post.id), class: "btn btn-sm btn-outline-secondary" do %>
+          <%= comment.post.name %></td>
+          <% end %>
         <td>
           <%= link_to admin_comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-outline-dark" do %>
           <i class="fa-solid fa-trash-can"></i>
