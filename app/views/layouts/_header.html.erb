@@ -159,15 +159,18 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>ゲストログインとは？</p>
+       <p><strong>ゲストログインとは？</strong></p>
         <ul>
-          
-          <li>『cafe一覧・詳細』の閲覧</li>
-          <li>『検索機能』もお使いいただけます <i class="fa-brands fa-envira fa-flip-horizontal fa-sm" style="color: #63E6BE;"></i></li>
+          <li>ゲストログインでは、登録なしで my_cafe の主要機能を手軽に体験できます。</li>
+          <li>「カフェの投稿/ピックアップ記事」を閲覧出来ます。</li>
+          <li>「検索機能」もご利用いただけます <i class="fa-brands fa-envira fa-flip-horizontal fa-sm" style="color: #63E6BE;"></i></li>
+          <li>カフェの評価<i class="fa-solid fa-star fa-xs" style="color: #FFD43B;"></i>や他のユーザーのいいね<i class="fa-solid fa-heart fa-xs" style="color: #ff7575;"></i>を確認できます。</li>
+          <li>コメントを閲覧し、他のユーザーの意見を参考にカフェ選びができます。</li>
+          <li>登録不要なので、まずは気軽にお試しください！</li>
         </ul>
         <%= form_with url: users_guest_sign_in_path, method: :post, local: true do %>
           <div class="form-group text-center">
-            <%= submit_tag 'ゲストログインを使ってみる！', class: 'btn  btn-outline-secondary' %>
+            <%= submit_tag 'ゲストログインを使ってみる！', class: 'btn  btn-outline-dark' %>
           </div>
         <% end %>
       </div>
