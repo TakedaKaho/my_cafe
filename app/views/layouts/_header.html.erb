@@ -124,7 +124,6 @@
  
   
 <% else %>
-  
 <nav class="navbar navbar-expand-md navbar-light border-bottom">
   <a class="navbar-brand" href="<%= root_path %>">
     <%= image_tag '3.png', size: '190x120' %>
@@ -135,7 +134,9 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-dark rounded-pill  mr-3" %>
+        <button type="button" class="btn btn-outline-dark rounded-pill mr-3" data-toggle="modal" data-target="#guestLoginModal">
+          ゲストログイン
+        </button>
       </li>
       <li class="nav-item">
         <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-dark rounded-pill mr-3" %>
@@ -147,8 +148,36 @@
   </div>
 </nav>
 
+<!-- ゲストログイン用モーダル -->
+<div class="modal fade" id="guestLoginModal" tabindex="-1" role="dialog" aria-labelledby="guestLoginModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="guestLoginModalLabel">ゲストログインを使用して</br>my_cafe <i class="fa-solid fa-mug-hot fa-sm"></i>を体験してみませんか? <i class="fa-regular fa-face-laugh fa-sm"></i> </i><i class="fa-solid fa-heart fa-sm" style="color: #ff99d4;"></i></i></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>ゲストログインとは？</p>
+        <ul>
+          
+          <li>『cafe一覧・詳細』の閲覧</li>
+          <li>『検索機能』もお使いいただけます <i class="fa-brands fa-envira fa-flip-horizontal fa-sm" style="color: #63E6BE;"></i></li>
+        </ul>
+        <%= form_with url: users_guest_sign_in_path, method: :post, local: true do %>
+          <div class="form-group text-center">
+            <%= submit_tag 'ゲストログインを使ってみる！', class: 'btn  btn-outline-secondary' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row"></div>
 
-
-    
 <% end %>
