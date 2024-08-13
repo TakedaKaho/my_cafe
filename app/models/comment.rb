@@ -28,8 +28,8 @@ class Comment < ApplicationRecord
     where("comment LIKE ?", "%#{word}%")
   end
   
-  def self.recent_comments(limit = 6)
-    order(created_at: :desc).limit(limit)
+  def self.high_rating_comments(min_rating = 4, limit = 6)
+    where('star >= ?', min_rating).order(created_at: :desc).limit(limit)
   end
   
 end
