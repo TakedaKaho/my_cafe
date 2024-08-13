@@ -28,9 +28,8 @@ class Comment < ApplicationRecord
     where("comment LIKE ?", "%#{word}%")
   end
   
-  # コメントをランダムに取得するメソッド
-  def self.random_comments(limit = 3)
-    order('RANDOM()').limit(limit)
+  def self.recent_comments(limit = 6)
+    order(created_at: :desc).limit(limit)
   end
   
 end
