@@ -27,4 +27,10 @@ class Comment < ApplicationRecord
   def self.looks(word)
     where("comment LIKE ?", "%#{word}%")
   end
+  
+  # コメントをランダムに取得するメソッド
+  def self.random_comments(limit = 3)
+    order('RANDOM()').limit(limit)
+  end
+  
 end

@@ -1,6 +1,7 @@
 class Public::HomesController < ApplicationController
     def top
       @posts = Post.order(created_at: :desc).limit(5)
+      @random_comments = Comment.random_comments
     end
     
     def terms
