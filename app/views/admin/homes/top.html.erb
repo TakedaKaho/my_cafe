@@ -6,19 +6,19 @@
       <%= link_to root_path do %>
         <%= image_tag 'KT.png', class: 'img-fluid', size: '150x150' %>
       <% end %>
-      <p class="mt-2">1. サイトTOPへ</p>
+      <p class="mt-2"><strong>1. サイトTOPへ</strong></p>
     </div>
     <div class="col-md-4 mb-4">
       <%= link_to admin_users_path do %>
         <%= image_tag 'KT1.png', class: 'img-fluid', size: '150x150' %>
       <% end %>
-      <p class="mt-2">2. 会員管理</p>
+      <p class="mt-2"><strong>2. 会員管理</strong></p>
     </div>
     <div class="col-md-4 mb-4">
       <%= link_to admin_posts_path do %>
         <%= image_tag 'KT2.png', class: 'img-fluid', size: '150x150' %>
       <% end %>
-      <p class="mt-2">3. 投稿管理</p>
+      <p class="mt-2"><strong>3. 投稿管理</strong></p>
     </div>
   </div>
 
@@ -27,24 +27,24 @@
       <%= link_to admin_comments_path do %>
         <%= image_tag 'KT3.png', class: 'img-fluid', size: '150x150' %>
       <% end %>
-      <p class="mt-2">4. コメント管理</p>
+      <p class="mt-2"><strong>4. コメント管理</strong></p>
     </div>
     <div class="col-md-4 mb-4">
       <%= link_to admin_tags_path do %>
         <%= image_tag 'KT4.png', class: 'img-fluid', size: '150x150' %>
       <% end %>
-      <p class="mt-2">5. タグ管理</p>
+      <p class="mt-2"><strong>5. タグ管理</strong></p>
     </div>
     <div class="col-md-4 mb-4">
       <%= link_to admin_pick_ups_path do %>
         <%= image_tag 'KT5.png', class: 'img-fluid', size: '150x150' %>
       <% end %>
-      <p class="mt-2">6. PickUp管理</p>
+      <p class="mt-2"><strong>6. PickUp管理</strong></p>
     </div>
   </div>
   
  <div class="container-fluid faq-wrapper mb-4" style='margin-top: 50px;'>
-  <h4 class="text-center pb-3"><strong>管理者向けおすすめ機能</strong> <i class="fa-solid fa-screwdriver-wrench"></i></h4>
+  <h3 class="text-center pb-3"><strong>管理者向けおすすめ機能</strong> <i class="fa-solid fa-screwdriver-wrench"></i></h3>
   <div class="row">
 
    <div class="col-6">
@@ -154,7 +154,7 @@
     <div class="col-md-4 mb-4">
       <div class="card h-100">
         <div class="card-body">
-          <h5 class="card-title">Total Users</h5>
+          <h5 class="card-title"><strong>Total Users</strong></h5>
           <p class="card-text"><%= @total_users %> users</p>
         </div>
       </div>
@@ -163,7 +163,7 @@
     <div class="col-md-4 mb-4">
       <div class="card h-100">
         <div class="card-body">
-          <h5 class="card-title">Total Comments</h5>
+          <h5 class="card-title"><strong>Total Comments</strong></h5>
           <p class="card-text"><%= @total_comments %> comments</p>
         </div>
       </div>
@@ -172,7 +172,7 @@
     <div class="col-md-4 mb-4">
       <div class="card h-100">
         <div class="card-body">
-          <h5 class="card-title">Total Posts</h5>
+          <h5 class="card-title"><strong>Total Posts</strong></h5>
           <p class="card-text"><%= @total_posts %> posts</p>
         </div>
       </div>
@@ -184,7 +184,7 @@
    <div class="col-md-12 mb-4">
     <div class="card h-100">
       <div class="card-body">
-        <h5 class="card-title">New Users (5)</h5>
+        <h5 class="card-title"><strong>New Users</strong> (5)</h5>
         <ul class="list-group">
           <% @recent_users.each do |user| %>
             <li class="list-group-item d-flex align-items-center">
