@@ -171,19 +171,30 @@
   </div>
   
    <div class="row">
-    <div class="col-md-12 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">New Users</h5>
-          <ul class="list-group">
-            <% @recent_users.each do |user| %>
-              <li class="list-group-item">
-                <%= user.name %> <span><%= user.created_at.strftime("%Y-%m-%d") %></span>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+  <div class="col-md-12 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">New Users</h5>
+        <ul class="list-group">
+          <% @recent_users.each do |user| %>
+            <li class="list-group-item d-flex align-items-center">
+              <% if user.profile_image.attached? %>
+                <%= image_tag url_for(user.profile_image), style: "width: 60px; height: 60px; object-fit: cover; margin-right: 1rem;" %>
+              <% else %>
+                <%= image_tag "no_image.jpg", style: "width: 60px; height: 60px; object-fit: cover; margin-right: 1rem;" %>
+              <% end %>
+              <div>
+                <strong><%= user.name %></strong>
+                <p class="mb-1 text-muted"><%= user.created_at.strftime("%Y-%m-%d") %></p>
+                <p class="mb-0"><%= user.body %></p>
+              </div>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
-   </div> 
+  </div>
+</div>
+
+   
 </div>
