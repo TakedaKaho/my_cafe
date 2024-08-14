@@ -38,6 +38,7 @@ protected
       redirect_to new_user_registration_path
     else
       sign_in(@user) # ログイン処理を実行
+      flash[:session_notice]="ログインしました。"
       redirect_to user_path(current_user)
     end
     #これは&&のelse
