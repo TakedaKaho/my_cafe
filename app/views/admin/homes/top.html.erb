@@ -205,5 +205,53 @@
     </div>
    </div>
   </div>
+  
+ <div class="row">
+  <div class="col-md-12 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">New Comments (8)</h5>
+        <div class="row">
+          <% @recent_comments.each do |comment| %>
+            <div class="col-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <span class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d") %></span>
+                  <% if comment.user.profile_image.attached? %>
+                    <%= image_tag url_for(comment.user.profile_image), style: "width: 60px; height: 60px; object-fit: cover; margin-left: 1rem;" %>
+                  <% else %>
+                    <%= image_tag "no_image.jpg", style: "width: 60px; height: 60px; object-fit: cover; margin-left: 1rem;" %>
+                  <% end %>
+                  <strong><%= comment.user.name %>:</strong> <%= comment.comment.truncate(50) %>
+
+                  <!-- 星評価の表示 -->
+                  <div id="star_<%= comment.id %>"></div>
+                  <script>
+                    $(document).on('turbolinks:load', function() {
+                      let elem = document.querySelector('#star_<%= comment.id %>');
+                      if (elem == null) return;
+
+                      elem.innerHTML = "";
+                      let opt = {  
+                        starOn: "<%= asset_path('star-on.png') %>",
+                        starOff: "<%= asset_path('star-off.png') %>",
+                        score: '<%= comment.star %>',
+                        readOnly: true,
+                      };
+                      raty(elem, opt);
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+
+
 
 </div>

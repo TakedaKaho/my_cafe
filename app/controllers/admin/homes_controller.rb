@@ -6,5 +6,6 @@ class Admin::HomesController < ApplicationController
      @total_comments = Comment.count
      @total_posts = Post.count
      @recent_users = User.order(created_at: :desc).limit(5)
+     @recent_comments = Comment.order(created_at: :desc).limit(8)
     end 
 end
