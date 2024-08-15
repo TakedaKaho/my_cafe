@@ -196,8 +196,13 @@
               <div>
                 <strong><%= user.name %></strong>
                 <p class="mb-1 text-muted"><%= user.created_at.strftime("%Y-%m-%d") %></p>
-                <p class="mb-0"><%= user.body %></p>
+                <% if user.is_deleted == true %>
+                 <strong class="text-secondary">退会済</strong>
+                <% else %>
+                 <strong class="text-info">有効</strong>
+                <% end %>
               </div>
+              <p class="mb-0 ml-4"><%= user.body %></p>
             </li>
           <% end %>
         </ul>
