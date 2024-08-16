@@ -1,5 +1,3 @@
-
-
 <%= form_with model: @post, url: admin_posts_path, method: :post, local: true, multipart: true, class: "post-form" do |form| %>
   <div class="container">
     <h2 class="text-center bg-dark text-white p-3" style="font-family: 'Arial', sans-serif;">C a f e 投 稿</h2>
@@ -127,17 +125,4 @@ document.addEventListener("turbolinks:load", function() {
   });
 });
 </script>
-
-
-
-
-
-  
-    <%#= form.label :latitude, "緯度:" %>
-    <%#= form.text_field :latitude, id: 'latitude', required: true, readonly: true %>
-  
-    <%#= form.label :longitude, "経度:" %>
-    <%#= form.text_field :longitude, id: 'longitude', required: true, readonly: true %>
-
-
 
