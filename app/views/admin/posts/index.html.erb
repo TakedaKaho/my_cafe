@@ -42,7 +42,7 @@
                   <td><%= post.name %></td>
                   <td><i class="fa-solid fa-star" style="color: #FFD43B;"></i> <%= '%.1f' % post.average_star %>点</td>
                   <td><i class="fa-solid fa-comments" style="color: #5c615f;"></i> <%= post.comments_count %>件</td>
-                  <td><%= post.likes.count %>件</td>
+                  <td><i class="fa-solid fa-heart fa-xs" style="color: #ff1a25;"></i><%= post.likes.count %>件</td>
                   <td>
                     <%= link_to admin_post_path(post.id), class: "btn btn-sm btn-outline-secondary" do %>
                       詳細へ
