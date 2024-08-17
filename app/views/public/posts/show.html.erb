@@ -1,11 +1,9 @@
 <div class="container">
-  
-<div class="row">
+ <div class="row">
   <div class="col-5 mb-2 mt-2">
     <span style="font-size: 2em;"><i class="fa-solid fa-caret-right"></i> <%= @post.name %></span>
   </div>
   <div class ="col-2"></div>
-  
   <div class="col-2 mt-4 text-right">
     <!--いいね機能-->
     <% if current_user && !current_user.guest_user? %>
@@ -20,8 +18,7 @@
       <i class="fa-regular fa-hand-point-right fa-lg"></i> いいね<i class="fa-solid fa-heart fa-xs" style="color: #ff1a25;"></i>したユーザ一覧
     <% end %>
    </div>
-  
-</div>
+ </div>
 
 <div class="row">
   <div class="col-md-4">
