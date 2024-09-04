@@ -17,14 +17,13 @@
       <div class="col-md-4">
         <div class="form-group">
           <%= form.label :post_images, "カフェ画像" %>
-          <%= form.file_field :post_images, multiple: true, accept: "image/*", id: "profile_image_input", class: "form-control-file" %>
-          <button type="button" id="add-file-field" class="ml-2 mt-2 btn btn-sm btn-outline-secondary">画像を追加</button>
+          <%= form.file_field :post_images, multiple: true, accept: "image/*", id: "cafe_image_input", class: "form-control-file" %>
+          <button type="button" id="add-cafe-image-field" class="ml-2 mt-2 btn btn-sm btn-outline-secondary">画像を追加</button>
         </div>
         
         <h6>< preview ></h6>
-        <div id="image_preview"></div>
+        <div id="cafe_image_preview"></div>
 
-        
         <h6>< 現在の画像 ></h6>
         <% @post.post_images.each do |image| %>
           <%= image_tag url_for(image), class: "img-thumbnail mt-2", style: "width: 90px; height: 90px; object-fit: cover;" %>
@@ -43,7 +42,6 @@
             </div>
           </div>
         </div>
-        
       </div>
       
       <div class="col-md-8">
@@ -74,13 +72,11 @@
   <% end %>
 </div>
 
-
-
 <!--画像追加ボタンとプレビュー-->
 <script>
 document.addEventListener("turbolinks:load", function() {
-  const addButton = document.getElementById("add-file-field");
-  const imagePreviewContainer = document.getElementById("image_preview");
+  const addButton = document.getElementById("add-cafe-image-field");
+  const imagePreviewContainer = document.getElementById("cafe_image_preview");
 
   addButton.addEventListener("click", function() {
     const fileFields = document.querySelectorAll("input[type='file']");
@@ -144,5 +140,4 @@ document.addEventListener("turbolinks:load", function() {
     });
   }
 });
-
 </script>
